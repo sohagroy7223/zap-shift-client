@@ -4,7 +4,7 @@ import icon from "../../../assets/bookingIcon.png";
 const Work = () => {
   return (
     <div className="p-3 space-y-4">
-      <h3 className="text-lg font-bold">How To Work</h3>
+      <h3 className="md:text-2xl text-lg font-bold">How To Work</h3>
 
       <div>
         <div className="grid gap-3 md:grid-cols-3 grid-cols-2 lg:grid-cols-4">

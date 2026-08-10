@@ -13,7 +13,7 @@ const Brand = () => {
 
   return (
     <section className=" space-y-5">
-      <h2 className="text-lg font-bold px-3">
+      <h2 className="md:text-2xl text-lg text-center font-bold px-3">
         We've helped thousands of sales teams
       </h2>
 
