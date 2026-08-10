@@ -4,15 +4,15 @@ import safeDelivery from "../../../assets/safe-delivery.png";
 
 const Serve = () => {
   return (
-    <div className="  space-y-4">
-      <div className="md:flex items-center p-2 gap-10 bg-white rounded-2xl space-y-5">
+    <div className="space-y-4">
+      <div className="md:flex items-center gap-5 bg-white rounded-2xl">
         {/* image */}
-        <div className="flex justify-center md:border-r border-dashed p-5">
-          <img className="w-55" src={liveTracking} alt="" />
+        <div className="flex md:w-60 justify-center md:border-r border-dashed p-5">
+          <img src={liveTracking} alt="" />
         </div>
 
         {/* content */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5">
           <hr className="block md:hidden" />
           <h3 className="text-lg font-bold">Live Parcel Tracking</h3>
           <p>
@@ -22,14 +22,14 @@ const Serve = () => {
           </p>
         </div>
       </div>
-      <div className="md:flex items-center p-2 gap-10 bg-white rounded-2xl space-y-5">
+      <div className="md:flex items-center gap-5 bg-white rounded-2xl">
         {/* image */}
-        <div className="flex justify-center md:border-r border-dashed p-5">
-          <img className="w-55" src={safeDelivery} alt="" />
+        <div className="flex md:w-60 justify-center md:border-r border-dashed p-5">
+          <img src={safeDelivery} alt="" />
         </div>
 
         {/* content */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5">
           <hr className="block md:hidden" />
           <h3 className="text-lg font-bold">100% Safe Delivery</h3>
           <p>
@@ -39,14 +39,14 @@ const Serve = () => {
           </p>
         </div>
       </div>
-      <div className="md:flex items-center p-2 gap-10 bg-white rounded-2xl space-y-5">
+      <div className="md:flex items-center gap-5 bg-white rounded-2xl">
         {/* image */}
-        <div className="flex justify-center md:border-r border-dashed p-5">
-          <img className="w-55" src={safeDelivery} alt="" />
+        <div className="flex md:w-60 justify-center md:border-r border-dashed p-5">
+          <img src={safeDelivery} alt="" />
         </div>
 
         {/* content */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-5">
           <hr className="block md:hidden" />
           <h3 className="text-lg font-bold">24/7 Call Center Support</h3>
           <p>

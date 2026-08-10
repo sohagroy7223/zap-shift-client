@@ -4,6 +4,7 @@ import Work from "../HowToWork/Work";
 import Services from "../OurServices/Services";
 import Brand from "../Brand/Brand";
 import Serve from "../Practical serv/Serve";
+import Priority from "../Priority/Priority";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Services></Services>
       <Brand></Brand>
       <Serve></Serve>
+      <Priority></Priority>
     </div>
   );
 };
