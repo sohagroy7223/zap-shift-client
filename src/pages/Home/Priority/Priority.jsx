@@ -8,8 +8,8 @@ const Priority = () => {
       <div className="absolute">
         <img src={bgImage} alt="" />
       </div>
-      <div className="bg-secondary text-white rounded-3xl md:flex p-5 items-center md:space-y-2.5">
-        <div className="md:w-6/12 space-y-4 px-3">
+      <div className="bg-secondary text-white rounded-3xl md:flex p-5 items-center space-y-2.5">
+        <div className="md:w-6/12 space-y-4">
           <h3 className="md:text-2xl text-xl text-center md:text-start font-bold ">
             Merchant and Customer Satisfaction is Our First Priority
           </h3>
@@ -18,11 +18,11 @@ const Priority = () => {
             with 100% safety of your product. Pathao courier delivers your
             parcels in every corner of Bangladesh right on time.
           </p>
-          <div className="flex gap-3.5">
-            <button className="btn bg-primary rounded-3xl">
+          <div className="flex gap-2 ">
+            <button className="btn btn-sm bg-primary md:rounded-3xl">
               Become a Merchant
             </button>
-            <button className="btn border border-green hover:bg-primary hover:text-black rounded-3xl">
+            <button className=" btn btn-sm hover:bg-primary md:rounded-3xl">
               Earn with ZapShift Courier
             </button>
           </div>
