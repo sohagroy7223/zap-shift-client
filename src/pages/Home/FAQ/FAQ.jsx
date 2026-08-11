@@ -32,8 +32,9 @@ const FAQ = () => {
           Is it suitable for all ages and body types?
         </div>
         <div className="collapse-content text-sm">
-          Click on "Forgot Password" on the login page and follow the
-          instructions sent to your email.
+          Yes. Our service is designed to be convenient and accessible for
+          people of different ages and needs. We focus on providing a safe,
+          comfortable, and hassle-free experience for everyone.
         </div>
       </div>
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
@@ -42,7 +43,9 @@ const FAQ = () => {
           Does it really help with back pain and posture improvement?
         </div>
         <div className="collapse-content text-sm">
-          Go to "My Account" settings and select "Edit Profile" to make changes.
+          It can help support better posture and may reduce discomfort when used
+          consistently and correctly. Results can vary from person to person, so
+          it’s best to use it as part of healthy posture and movement habits.
         </div>
       </div>
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
@@ -51,7 +54,9 @@ const FAQ = () => {
           Does it have smart features like vibration alerts?
         </div>
         <div className="collapse-content text-sm">
-          Go to "My Account" settings and select "Edit Profile" to make changes.
+          Yes. It includes smart features such as vibration alerts that gently
+          remind you when your posture needs adjustment. This makes it easier to
+          maintain better posture throughout the day.
         </div>
       </div>
       <div className="collapse collapse-arrow bg-base-100 border border-base-300">
@@ -60,7 +65,9 @@ const FAQ = () => {
           How will I be notified when the product is back in stock?
         </div>
         <div className="collapse-content text-sm">
-          Go to "My Account" settings and select "Edit Profile" to make changes.
+          You can sign up for restock notifications using your email address.
+          Once the product is available again, we’ll send you an email so you
+          can purchase it without missing out.
         </div>
       </div>
     </div>
