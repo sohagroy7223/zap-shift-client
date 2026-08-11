@@ -11,7 +11,7 @@ import ReviewCard from "./ReviewCard";
 
 const Reviews = ({ reviews }) => {
   return (
-    <div className="space-y-5">
+    <div className="space-y-10">
       <div className="flex justify-center">
         <img src={image} alt="" />
       </div>

@@ -7,6 +7,7 @@ import Serve from "../Practical serv/Serve";
 import Priority from "../Priority/Priority";
 import Reviews from "../Reviews/Reviews";
 import axios from "axios";
+import FAQ from "../FAQ/FAQ";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -25,6 +26,7 @@ const Home = () => {
       <Serve></Serve>
       <Priority></Priority>
       <Reviews reviews={reviews}></Reviews>
+      <FAQ></FAQ>
     </div>
   );
 };

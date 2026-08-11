@@ -12,7 +12,7 @@ const ReviewCard = ({ review }) => {
     date,
   } = review;
   return (
-    <div className="border p-5 rounded-2xl space-y-3">
+    <div className="border border-green-900 p-5 rounded-2xl space-y-3">
       {/*  */}
       <div className="md:flex items-center gap-4">
         <img className="rounded-full md:w-13 w-8" src={user_photoURL} alt="" />

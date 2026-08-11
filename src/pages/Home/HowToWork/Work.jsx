@@ -8,7 +8,7 @@ const Work = () => {
 
       <div>
         <div className="grid gap-3 md:grid-cols-3 grid-cols-2 lg:grid-cols-4">
-          <div className="border rounded-xl p-4 space-y-4 bg-white hover:bg-primary duration-500">
+          <div className="border rounded-xl p-4 space-y-4 bg-white hover:bg-primary duration-500 ">
             <img className="w-10" src={icon} alt="" />
             <b className="text-secondary">Booking Pick & Drop</b>
             <p className="text-[#606060]">
