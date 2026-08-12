@@ -1,7 +1,7 @@
 import image from "../../../assets/customer-top.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -29,16 +29,21 @@ const Reviews = ({ reviews }) => {
         effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
         slidesPerView={3}
         coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
+          rotate: 30,
+          stretch: "20%",
           depth: 100,
           modifier: 1,
+          scale: 0.5,
           slideShadows: true,
         }}
         pagination={true}
-        modules={[EffectCoverflow, Pagination]}
+        modules={[EffectCoverflow, Autoplay, Pagination]}
         className="mySwiper"
       >
         {reviews.map((review) => (

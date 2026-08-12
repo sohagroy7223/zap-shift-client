@@ -2,7 +2,7 @@ import React from "react";
 import image from "../../../assets/reviewQuote.png";
 
 const ReviewCard = ({ review }) => {
-  console.log(review);
+  // console.log(review);
   const {
     review: description,
     user_photoURL,

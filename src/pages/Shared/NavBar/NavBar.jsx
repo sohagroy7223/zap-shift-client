@@ -7,16 +7,33 @@ const NavBar = () => {
     <>
       <li>
         <NavLink
-          className={({ isActive }) =>
+          to="/"
+          className={({ isActive, isPending }) =>
             isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
           }
-          to=""
         >
           Services
         </NavLink>
       </li>
       <li>
-        <a>Submenu 2</a>
+        <NavLink
+          to="/about"
+          className={({ isActive, isPending }) =>
+            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/coverage"
+          className={({ isActive, isPending }) =>
+            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+          }
+        >
+          Coverage
+        </NavLink>
       </li>
     </>
   );
