@@ -35,6 +35,16 @@ const NavBar = () => {
           Coverage
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/go"
+          className={({ isActive, isPending }) =>
+            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+          }
+        >
+          Coverage
+        </NavLink>
+      </li>
     </>
   );
   return (

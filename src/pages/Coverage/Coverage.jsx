@@ -13,7 +13,10 @@ const Coverage = () => {
         We are available in 64 districts
       </h3>
       {/* for search */}
-      <div></div>
+      <div className="flex">
+        <input className="border p-1" type="text" placeholder="search here" />
+        <button className="btn bg-primary rounded-full">search</button>
+      </div>
       {/* for map */}
       <div className="border  space-y-3 p-3">
         <h3 className="text-3xl font-bold">

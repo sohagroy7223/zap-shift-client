@@ -3,11 +3,13 @@ import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home/Home/Home";
 import About from "../pages/About/About";
 import Coverage from "../pages/Coverage/Coverage";
+import Error from "../pages/ErrorPage/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
