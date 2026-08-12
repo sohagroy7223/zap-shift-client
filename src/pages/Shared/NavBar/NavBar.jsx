@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../../Components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const NavBar = () => {
   const links = (
@@ -75,9 +75,10 @@ const NavBar = () => {
             {links}
           </ul>
         </div>
-        <a href="/">
+
+        <Link to="/">
           <Logo></Logo>
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
