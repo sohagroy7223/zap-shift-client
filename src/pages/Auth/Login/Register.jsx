@@ -21,6 +21,13 @@ const Register = () => {
       </h3>
       <form onSubmit={handleSubmit(handelRegister)}>
         <fieldset className="fieldset">
+          <label className="label">Name</label>
+          <input
+            type="text"
+            {...register("name", { required: true })}
+            className="input"
+            placeholder="Your name"
+          />
           <label className="label">Email</label>
           <input
             type="email"
