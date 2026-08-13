@@ -9,7 +9,7 @@ const NavBar = () => {
         <NavLink
           to="/"
           className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
           }
         >
           Services
@@ -19,7 +19,7 @@ const NavBar = () => {
         <NavLink
           to="/about"
           className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
           }
         >
           About Us
@@ -29,7 +29,7 @@ const NavBar = () => {
         <NavLink
           to="/coverage"
           className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
           }
         >
           Coverage
@@ -39,7 +39,7 @@ const NavBar = () => {
         <NavLink
           to="/go"
           className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold text-blue-500 underline" : "mr-4"
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
           }
         >
           Coverage
