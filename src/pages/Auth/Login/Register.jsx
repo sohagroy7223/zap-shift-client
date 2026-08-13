@@ -1,5 +1,7 @@
+import { pattern } from "framer-motion/client";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 
 const Register = () => {
   const {
@@ -32,7 +34,24 @@ const Register = () => {
           <label className="label">Password</label>
           <input
             type="password"
-            {...register("password", { required: true, minLength: 6 })}
+            {...register("password", {
+              required: true,
+              validate: {
+                uppercase: (value) =>
+                  /[A-Z]/.test(value) || "Add an uppercase letter",
+
+                lowercase: (value) =>
+                  /[a-z]/.test(value) || "Add a lowercase letter",
+
+                number: (value) => /\d/.test(value) || "Add a number",
+
+                special: (value) =>
+                  /[@$!%*?&]/.test(value) || "Add a special character",
+
+                length: (value) =>
+                  value.length >= 6 || "Password must be at least 6 characters",
+              },
+            })}
             className="input"
             autoComplete="password"
             placeholder="Password"
@@ -40,16 +59,37 @@ const Register = () => {
           {errors.password?.type === "required" && (
             <p className="text-red-500">Password Field is Required</p>
           )}
-          {errors.password?.type === "minLength" && (
-            <p className="text-red-500">
-              password must be 6 creatures or longer{" "}
-            </p>
+
+          {errors.password?.type === "uppercase" && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+
+          {errors.password?.type === "lowercase" && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+
+          {errors.password?.type === "number" && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+
+          {errors.password?.type === "special" && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+
+          {errors.password?.type === "length" && (
+            <p className="text-red-500">{errors.password.message}</p>
           )}
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
           <button className="btn btn-neutral mt-4">Sign Up</button>
         </fieldset>
+        <p>
+          Already have an account?{" "}
+          <Link className="text-blue-600 font-bold hover:underline" to="/login">
+            Login
+          </Link>{" "}
+        </p>
       </form>
     </div>
   );
