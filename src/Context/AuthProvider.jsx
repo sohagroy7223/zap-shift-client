@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import Loading from "../Components/Loading/Loading";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -51,6 +52,11 @@ const AuthProvider = ({ children }) => {
     loading,
     signOutUser,
   };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };
 

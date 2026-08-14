@@ -1,15 +1,21 @@
 import React from "react";
 import Logo from "../../../Components/Logo/Logo";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 
 const NavBar = () => {
   const { user, signOutUser } = useAuth();
+  const navigate = useNavigate();
   // console.log(user);
   const handelSignOut = () => {
-    signOutUser().then(() => {
-      alert("sign out successFully");
-    });
+    signOutUser()
+      .then(() => {
+        alert("sign out successFully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const links = (
