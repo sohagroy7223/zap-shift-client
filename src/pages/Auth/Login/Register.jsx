@@ -1,9 +1,11 @@
 import { pattern } from "framer-motion/client";
-import React from "react";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const Register = () => {
+  const { createUser } = use(AuthContext);
   const {
     register,
     handleSubmit,
@@ -11,7 +13,9 @@ const Register = () => {
   } = useForm();
 
   const handelRegister = (data) => {
-    console.log(data);
+    createUser(data.email, data.password).then((res) => {
+      console.log(res);
+    });
   };
 
   return (

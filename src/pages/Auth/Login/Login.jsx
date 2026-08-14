@@ -1,12 +1,26 @@
 import React, { use } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../../Context/AuthContext";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const { signInWithGoogle } = use(AuthContext);
+  const { signInWithGoogle, signInUser } = use(AuthContext);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const handelGoogleLogin = () => {
     signInWithGoogle().then((result) => {
       console.log("after login", result);
+    });
+  };
+
+  const handelSignUser = (data) => {
+    signInUser(data.email, data.password).then((res) => {
+      console.log(res);
     });
   };
 
@@ -15,12 +29,23 @@ const Login = () => {
       <h3 className="md:text-4xl text-2xl font-bold text-center">
         Welcome Back
       </h3>
-      <form>
+      <form onSubmit={handleSubmit(handelSignUser)}>
         <fieldset className="fieldset">
           <label className="label">Email</label>
-          <input type="email" className="input" placeholder="Email" />
+          <input
+            type="email"
+            {...register("email", { required: true })}
+            className="input"
+            placeholder="Email"
+          />
           <label className="label">Password</label>
-          <input type="password" className="input" placeholder="Password" />
+          <input
+            type="password"
+            autoComplete="password"
+            {...register("password", { required: true })}
+            className="input"
+            placeholder="Password"
+          />
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
