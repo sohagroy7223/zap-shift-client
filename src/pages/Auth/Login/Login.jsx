@@ -1,10 +1,11 @@
-import React, { use } from "react";
+import React from "react";
 import { Link } from "react-router";
-import { AuthContext } from "../../../Context/AuthContext";
+
 import { useForm } from "react-hook-form";
+import useAuth from "../../../Hooks/useAuth";
 
 const Login = () => {
-  const { signInWithGoogle, signInUser } = use(AuthContext);
+  const { signInWithGoogle, signInUser } = useAuth();
 
   const {
     register,
