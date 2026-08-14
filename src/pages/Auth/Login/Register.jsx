@@ -25,7 +25,7 @@ const Register = () => {
   return (
     <div className="p-5 rounded-2xl shadow-2xl shadow-gray-500 bg-white">
       <h3 className="md:text-4xl text-2xl font-bold text-center">
-        Sign up Now
+        Sign up <br /> Now
       </h3>
       <form onSubmit={handleSubmit(handelRegister)}>
         <fieldset className="fieldset">
@@ -36,6 +36,9 @@ const Register = () => {
             className="input"
             placeholder="Your name"
           />
+          {errors.email?.type === "required" && (
+            <p className="text-red-500">Name Field is Required</p>
+          )}
           <label className="label">Email</label>
           <input
             type="email"
@@ -97,7 +100,9 @@ const Register = () => {
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-          <button className="btn btn-neutral mt-4">Sign Up</button>
+          <button className="btn bg-primary text-secondary font-bold mt-4">
+            Sign Up
+          </button>
         </fieldset>
         <p>
           Already have an account?{" "}

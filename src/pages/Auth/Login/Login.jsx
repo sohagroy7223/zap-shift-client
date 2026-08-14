@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 
 const Login = () => {
   const { signInWithGoogle, signInUser } = useAuth();
+  const [errorMessage, setErrorMessage] = useState("");
 
   const {
     register,
@@ -19,20 +20,26 @@ const Login = () => {
   };
 
   const handelSignUser = (data) => {
+    setErrorMessage("");
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.code === "auth/invalid-credential") {
+          setErrorMessage("Incorrect email or password");
+        }
       });
   };
 
   return (
     <div className="p-5 rounded-2xl shadow-2xl shadow-gray-500 bg-white">
-      <h3 className="md:text-4xl text-2xl font-bold text-center">
-        Welcome Back
-      </h3>
+      <div className="text-center">
+        <h3 className="md:text-4xl text-2xl font-bold text-center">
+          Welcome Back
+        </h3>
+        <p className="font-medium">please login</p>
+      </div>
       <form onSubmit={handleSubmit(handelSignUser)}>
         <fieldset className="fieldset">
           <label className="label">Email</label>
@@ -57,12 +64,20 @@ const Login = () => {
             <p className="text-red-500">Password Field is Required</p>
           )}
           {errors.password?.type === "minLength" && (
-            <p className="text-red-500">Password must be 6 creature</p>
+            <p className="text-red-500">
+              Password must be 6 creatures or longer
+            </p>
           )}
+          {errorMessage && (
+            <p className="text-red-500">Incorrect email or password</p>
+          )}
+
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
-          <button className="btn btn-neutral mt-4">Login</button>
+          <button className="btn bg-primary text-secondary font-bold mt-4">
+            Login
+          </button>
         </fieldset>
         <p>
           don't have an account{" "}
