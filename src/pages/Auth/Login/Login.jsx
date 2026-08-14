@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 
@@ -20,9 +19,13 @@ const Login = () => {
   };
 
   const handelSignUser = (data) => {
-    signInUser(data.email, data.password).then((res) => {
-      console.log(res);
-    });
+    signInUser(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -39,14 +42,23 @@ const Login = () => {
             className="input"
             placeholder="Email"
           />
+          {errors.email?.type === "required" && (
+            <p className="text-red-500">Email Filed is Required</p>
+          )}
           <label className="label">Password</label>
           <input
             type="password"
             autoComplete="password"
-            {...register("password", { required: true })}
+            {...register("password", { required: true, minLength: 6 })}
             className="input"
             placeholder="Password"
           />
+          {errors.password?.type === "required" && (
+            <p className="text-red-500">Password Field is Required</p>
+          )}
+          {errors.password?.type === "minLength" && (
+            <p className="text-red-500">Password must be 6 creature</p>
+          )}
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
