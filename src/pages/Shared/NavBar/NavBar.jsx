@@ -4,8 +4,14 @@ import { Link, NavLink } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 
 const NavBar = () => {
-  const { user } = useAuth();
-  console.log(user);
+  const { user, signOutUser } = useAuth();
+  // console.log(user);
+  const handelSignOut = () => {
+    signOutUser().then(() => {
+      alert("sign out successFully");
+    });
+  };
+
   const links = (
     <>
       <li>
@@ -79,24 +85,25 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <Link to="/">
-          <Logo></Logo>
-        </Link>
+        <Logo></Logo>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
         {user ? (
+          <button
+            onClick={handelSignOut}
+            className="btn btn-outline hover:text-secondary font-bold hover:btn-primary"
+          >
+            Log out
+          </button>
+        ) : (
           <Link to="/login">
             <button className="btn btn-outline hover:text-secondary font-bold hover:btn-primary">
-              Login
+              Log in
             </button>
           </Link>
-        ) : (
-          <button className="btn btn-outline hover:text-secondary font-bold hover:btn-primary">
-            Logout
-          </button>
         )}
       </div>
     </div>

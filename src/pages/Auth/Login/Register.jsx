@@ -1,11 +1,13 @@
 import { pattern } from "framer-motion/client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 
 const Register = () => {
   const { createUser } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,6 +18,7 @@ const Register = () => {
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

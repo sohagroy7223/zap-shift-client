@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 
 const Login = () => {
   const { signInWithGoogle, signInUser } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -14,9 +15,14 @@ const Login = () => {
   } = useForm();
 
   const handelGoogleLogin = () => {
-    signInWithGoogle().then((result) => {
-      console.log("after login", result);
-    });
+    signInWithGoogle()
+      .then((result) => {
+        navigate("/");
+        console.log("after login", result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handelSignUser = (data) => {
@@ -24,6 +30,7 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result);
+        navigate("/");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {
