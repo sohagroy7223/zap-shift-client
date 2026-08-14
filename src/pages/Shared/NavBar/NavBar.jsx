@@ -1,11 +1,11 @@
-import React, { use } from "react";
+import React from "react";
 import Logo from "../../../Components/Logo/Logo";
 import { Link, NavLink } from "react-router";
-import { AuthContext } from "../../../Context/AuthContext";
+import useAuth from "../../../Hooks/useAuth";
 
 const NavBar = () => {
-  const userInfo = use(AuthContext);
-  // console.log(userInfo);
+  const { user } = useAuth();
+  console.log(user);
   const links = (
     <>
       <li>
@@ -87,11 +87,17 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login">
+        {user ? (
+          <Link to="/login">
+            <button className="btn btn-outline hover:text-secondary font-bold hover:btn-primary">
+              Login
+            </button>
+          </Link>
+        ) : (
           <button className="btn btn-outline hover:text-secondary font-bold hover:btn-primary">
-            Login
+            Logout
           </button>
-        </Link>
+        )}
       </div>
     </div>
   );

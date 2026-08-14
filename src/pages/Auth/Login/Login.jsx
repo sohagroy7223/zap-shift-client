@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className="p-5 rounded-2xl shadow-2xl shadow-gray-500 bg-white">
       <div className="text-center">
-        <h3 className="md:text-4xl text-2xl font-bold text-center">
+        <h3 className="md:text-3xl text-2xl font-bold text-center">
           Welcome Back
         </h3>
         <p className="font-medium">please login</p>

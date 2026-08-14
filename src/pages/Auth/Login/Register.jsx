@@ -24,8 +24,8 @@ const Register = () => {
 
   return (
     <div className="p-5 rounded-2xl shadow-2xl shadow-gray-500 bg-white">
-      <h3 className="md:text-4xl text-2xl font-bold text-center">
-        Sign up <br /> Now
+      <h3 className="md:text-3xl text-2xl font-bold text-center mb-3">
+        Sign up Now
       </h3>
       <form onSubmit={handleSubmit(handelRegister)}>
         <fieldset className="fieldset">
