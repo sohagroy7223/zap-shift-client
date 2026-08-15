@@ -7,6 +7,7 @@ import Error from "../pages/ErrorPage/Error";
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Login/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/coverage",
-        Component: Coverage,
+        element: (
+          <PrivateRoute>
+            <Coverage></Coverage>
+          </PrivateRoute>
+        ),
         loader: () => fetch("/servicesCenter.json").then((res) => res.json()),
       },
     ],
