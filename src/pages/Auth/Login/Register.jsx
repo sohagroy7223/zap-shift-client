@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { Link, Navigate, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
+import axios from "axios";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -16,11 +17,33 @@ const Register = () => {
   } = useForm();
 
   const handelRegister = (data) => {
-    console.log(data);
+    // console.log(data.image[0]);
+    const profileImage = data.image[0];
     createUser(data.email, data.password)
       .then((result) => {
-        console.log(result);
-        navigate("/");
+        // console.log(result);
+        // store image and get the photoURL
+        const formData = new FormData();
+        formData.append("image", profileImage);
+
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`;
+
+        // post Image
+        axios.post(image_API_URL, formData).then((res) => {
+          const image = res.data.data.url;
+          // console.log(" after get image", image);
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUserProfile(userProfile)
+            .then(() => {
+              console.log("user profile update done");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
       })
       .catch((error) => {
         console.log(error);
