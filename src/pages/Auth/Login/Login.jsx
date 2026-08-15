@@ -34,7 +34,7 @@ const Login = () => {
         <h3 className="md:text-3xl text-2xl font-bold text-center">
           Welcome Back
         </h3>
-        <p className="font-medium">please login</p>
+        <p className="font-medium text-secondary">please login</p>
       </div>
       <form onSubmit={handleSubmit(handelSignUser)}>
         <fieldset className="fieldset">

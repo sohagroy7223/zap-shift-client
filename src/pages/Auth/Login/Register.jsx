@@ -16,6 +16,7 @@ const Register = () => {
   } = useForm();
 
   const handelRegister = (data) => {
+    console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
@@ -27,12 +28,13 @@ const Register = () => {
   };
 
   return (
-    <div className="p-5 rounded-2xl shadow-2xl shadow-gray-500 bg-white">
+    <div className="p-3 rounded-2xl shadow-2xl  shadow-gray-500 bg-white">
       <h3 className="md:text-3xl text-2xl font-bold text-center mb-3">
         Sign up Now
       </h3>
       <form onSubmit={handleSubmit(handelRegister)}>
         <fieldset className="fieldset">
+          {/* name field */}
           <label className="label">Name</label>
           <input
             type="text"
@@ -40,8 +42,18 @@ const Register = () => {
             className="input"
             placeholder="Your name"
           />
-          {errors.email?.type === "required" && (
+          {errors.name?.type === "required" && (
             <p className="text-red-500">Name Field is Required</p>
+          )}
+          {/* photo input filed */}
+          <label className="label">Image</label>
+          <input
+            type="file"
+            {...register("image", { required: true })}
+            className="file-input "
+          />
+          {errors.image?.type === "required" && (
+            <p className="text-red-500">Image Field is Required</p>
           )}
           <label className="label">Email</label>
           <input

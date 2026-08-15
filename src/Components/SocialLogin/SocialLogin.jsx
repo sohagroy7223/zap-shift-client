@@ -17,7 +17,7 @@ const SocialLogin = () => {
       });
   };
   return (
-    <div className="flex flex-col mt-2 space-y-2 text-center">
+    <div className="flex flex-col space-y-2 text-center">
       <b>or</b>
 
       <button
