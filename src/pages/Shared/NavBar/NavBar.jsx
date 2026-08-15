@@ -96,21 +96,26 @@ const NavBar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-2">
         {user ? (
           <button
             onClick={handelSignOut}
-            className="btn btn-outline hover:text-secondary font-bold hover:btn-primary"
+            className="btn btn-outline hover:text-secondary text-xs md:text-sm hover:btn-primary"
           >
             Log out
           </button>
         ) : (
           <Link to="/login">
-            <button className="btn btn-outline hover:text-secondary font-bold hover:btn-primary">
+            <button className="btn btn-outline hover:text-secondary text-xs md:text-sm hover:btn-primary">
               Log in
             </button>
           </Link>
         )}
+        <Link>
+          <button className="btn  text-secondary text-xs md:text-sm btn-primary">
+            Be a Rider
+          </button>
+        </Link>
       </div>
     </div>
   );
