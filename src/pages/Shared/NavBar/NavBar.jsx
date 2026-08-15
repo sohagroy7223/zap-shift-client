@@ -2,16 +2,32 @@ import React from "react";
 import Logo from "../../../Components/Logo/Logo";
 import { Link, NavLink, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const { user, signOutUser } = useAuth();
   const navigate = useNavigate();
   // console.log(user);
   const handelSignOut = () => {
-    signOutUser()
-      .then(() => {
-        alert("sign out successFully");
-        navigate("/login");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "want to Log Out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log Out",
+    })
+      .then((result) => {
+        if (result.isConfirmed)
+          signOutUser().then(() => {
+            Swal.fire({
+              title: "Log Out",
+              text: "Log out Success fully",
+              icon: "success",
+            });
+            navigate("/login");
+          });
       })
       .catch((error) => {
         console.log(error);
