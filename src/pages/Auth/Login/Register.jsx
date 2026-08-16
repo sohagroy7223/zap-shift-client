@@ -7,7 +7,7 @@ import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import axios from "axios";
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, verificationEmail } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -39,7 +39,14 @@ const Register = () => {
           };
           updateUserProfile(userProfile)
             .then(() => {
-              navigate(location?.state || "/");
+              verificationEmail()
+                .then(() => {
+                  alert("check your mail, and verified email");
+                  navigate(location?.state || "/");
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             })
             .catch((error) => {
               console.log(error);
