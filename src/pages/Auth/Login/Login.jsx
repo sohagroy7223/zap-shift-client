@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
@@ -7,6 +7,8 @@ import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 const Login = () => {
   const { signInUser } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,7 +21,7 @@ const Login = () => {
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result);
-        navigate("/");
+        navigate(location?.state || "/");
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {
@@ -78,6 +80,7 @@ const Login = () => {
         <p>
           don't have an account{" "}
           <Link
+            state={location.state}
             className="text-blue-600 font-bold hover:underline"
             to="/register"
           >

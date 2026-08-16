@@ -127,7 +127,7 @@ const NavBar = () => {
             </button>
           </Link>
         )}
-        <Link>
+        <Link to="/rider">
           <button className="btn  text-secondary text-xs md:text-sm btn-primary">
             Be a Rider
           </button>

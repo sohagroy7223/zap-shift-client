@@ -1,14 +1,16 @@
 import { pattern } from "framer-motion/client";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  console.log("location in the register page", location);
 
   const {
     register,
@@ -38,7 +40,7 @@ const Register = () => {
           };
           updateUserProfile(userProfile)
             .then(() => {
-              console.log("user profile update done");
+              navigate(location?.state || "/");
             })
             .catch((error) => {
               console.log(error);
@@ -145,7 +147,11 @@ const Register = () => {
         </fieldset>
         <p>
           Already have an account?{" "}
-          <Link className="text-blue-600 font-bold hover:underline" to="/login">
+          <Link
+            state={location.state}
+            className="text-blue-600 font-bold hover:underline"
+            to="/login"
+          >
             Login
           </Link>{" "}
         </p>
