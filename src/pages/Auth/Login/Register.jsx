@@ -10,7 +10,6 @@ const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  console.log("location in the register page", location);
 
   const {
     register,

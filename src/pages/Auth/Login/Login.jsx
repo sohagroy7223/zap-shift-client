@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, forgetPasswordMail } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  // const emailRef = useRef();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -27,6 +29,18 @@ const Login = () => {
         if (error.code === "auth/invalid-credential") {
           setErrorMessage("Incorrect email or password");
         }
+      });
+  };
+
+  const handelForgetPassword = () => {
+    const email = getValues("email");
+
+    forgetPasswordMail(email)
+      .then(() => {
+        alert("please check your email and reset your password");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -70,7 +84,7 @@ const Login = () => {
             <p className="text-red-500">Incorrect email or password</p>
           )}
 
-          <div>
+          <div onClick={handelForgetPassword}>
             <a className="link link-hover">Forgot password?</a>
           </div>
           <button className="btn bg-primary text-secondary font-bold mt-4">
