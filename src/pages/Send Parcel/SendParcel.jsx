@@ -1,108 +1,123 @@
 import { useState } from "react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
+  const servicesCenter = useLoaderData();
   const {
     register,
     handleSubmit,
+    watch,
     getValues,
     formState: { errors },
   } = useForm();
 
-  const districts = [
-    "Bagerhat",
-    "Bandarban",
-    "Barguna",
-    "Barishal",
-    "Bhola",
-    "Bogura",
-    "Brahmanbaria",
-    "Chandpur",
-    "Chattogram",
-    "Chuadanga",
-    "Cox's Bazar",
-    "Cumilla",
-    "Dhaka",
-    "Dinajpur",
-    "Faridpur",
-    "Feni",
-    "Gaibandha",
-    "Gazipur",
-    "Gopalganj",
-    "Habiganj",
-    "Jamalpur",
-    "Jashore",
-    "Jhalokathi",
-    "Jhenaidah",
-    "Joypurhat",
-    "Khagrachhari",
-    "Khulna",
-    "Kishoreganj",
-    "Kurigram",
-    "Kushtia",
-    "Lakshmipur",
-    "Lalmonirhat",
-    "Madaripur",
-    "Magura",
-    "Manikganj",
-    "Meherpur",
-    "Moulvibazar",
-    "Munshiganj",
-    "Mymensingh",
-    "Naogaon",
-    "Narail",
-    "Narayanganj",
-    "Narsingdi",
-    "Natore",
-    "Netrokona",
-    "Nilphamari",
-    "Noakhali",
-    "Pabna",
-    "Panchagarh",
-    "Patuakhali",
-    "Pirojpur",
-    "Rajbari",
-    "Rajshahi",
-    "Rangamati",
-    "Rangpur",
-    "Satkhira",
-    "Shariatpur",
-    "Sherpur",
-    "Sirajganj",
-    "Sunamganj",
-    "Sylhet",
-    "Tangail",
-    "Thakurgaon",
-  ];
+  const senderRegion = watch("senderRegion");
+  const receiverRegion = watch("receiverRegion");
 
-  const [senderDistrict, setSenderDistrict] = useState("");
-  const [receiverDistrict, setReceiverDistrict] = useState("");
-
-  const [showSenderDistricts, setShowSenderDistricts] = useState(false);
-  const [showReceiverDistricts, setShowReceiverDistricts] = useState(false);
-
-  const filteredSenderDistricts = districts.filter((item) =>
-    item.toLowerCase().includes(senderDistrict.toLowerCase()),
-  );
-
-  const filteredReceiverDistricts = districts.filter((item) =>
-    item.toLowerCase().includes(receiverDistrict.toLowerCase()),
-  );
-
-  const handleSenderDistrictSelect = (value) => {
-    setSenderDistrict(value);
-    setShowSenderDistricts(false);
+  const regionDuplicate = servicesCenter.map((c) => c.region);
+  const regions = [...new Set(regionDuplicate)];
+  //   console.log(region);
+  const districtsByRegion = (region) => {
+    const regionDistrict = servicesCenter.filter((c) => c.region === region);
+    const district = regionDistrict.map((d) => d.district);
+    return district;
   };
+  //   const districts = [
+  //     "Bagerhat",
+  //     "Bandarban",
+  //     "Barguna",
+  //     "Barishal",
+  //     "Bhola",
+  //     "Bogura",
+  //     "Brahmanbaria",
+  //     "Chandpur",
+  //     "Chattogram",
+  //     "Chuadanga",
+  //     "Cox's Bazar",
+  //     "Cumilla",
+  //     "Dhaka",
+  //     "Dinajpur",
+  //     "Faridpur",
+  //     "Feni",
+  //     "Gaibandha",
+  //     "Gazipur",
+  //     "Gopalganj",
+  //     "Habiganj",
+  //     "Jamalpur",
+  //     "Jashore",
+  //     "Jhalokathi",
+  //     "Jhenaidah",
+  //     "Joypurhat",
+  //     "Khagrachhari",
+  //     "Khulna",
+  //     "Kishoreganj",
+  //     "Kurigram",
+  //     "Kushtia",
+  //     "Lakshmipur",
+  //     "Lalmonirhat",
+  //     "Madaripur",
+  //     "Magura",
+  //     "Manikganj",
+  //     "Meherpur",
+  //     "Moulvibazar",
+  //     "Munshiganj",
+  //     "Mymensingh",
+  //     "Naogaon",
+  //     "Narail",
+  //     "Narayanganj",
+  //     "Narsingdi",
+  //     "Natore",
+  //     "Netrokona",
+  //     "Nilphamari",
+  //     "Noakhali",
+  //     "Pabna",
+  //     "Panchagarh",
+  //     "Patuakhali",
+  //     "Pirojpur",
+  //     "Rajbari",
+  //     "Rajshahi",
+  //     "Rangamati",
+  //     "Rangpur",
+  //     "Satkhira",
+  //     "Shariatpur",
+  //     "Sherpur",
+  //     "Sirajganj",
+  //     "Sunamganj",
+  //     "Sylhet",
+  //     "Tangail",
+  //     "Thakurgaon",
+  //   ];
 
-  const handleReceiverDistrictSelect = (value) => {
-    setReceiverDistrict(value);
-    setShowReceiverDistricts(false);
-  };
+  //   const [senderDistrict, setSenderDistrict] = useState("");
+  //   const [receiverDistrict, setReceiverDistrict] = useState("");
+
+  //   const [showSenderDistricts, setShowSenderDistricts] = useState(false);
+  //   const [showReceiverDistricts, setShowReceiverDistricts] = useState(false);
+
+  //   const filteredSenderDistricts = districts.filter((item) =>
+  //     item.toLowerCase().includes(senderDistrict.toLowerCase()),
+  //   );
+
+  //   const filteredReceiverDistricts = districts.filter((item) =>
+  //     item.toLowerCase().includes(receiverDistrict.toLowerCase()),
+  //   );
+
+  //   const handleSenderDistrictSelect = (value) => {
+  //     setSenderDistrict(value);
+  //     setShowSenderDistricts(false);
+  //   };
+
+  //   const handleReceiverDistrictSelect = (value) => {
+  //     setReceiverDistrict(value);
+  //     setShowReceiverDistricts(false);
+  //   };
 
   const handelFromSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <div className="space-y-3">
       <div className="space-y-2">
@@ -218,50 +233,49 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* sender Region */}
+              <fieldset className="fieldset">
+                <legend className="label text-sm font-bold text-secondary">
+                  Sender Region
+                </legend>
+                <select
+                  {...register("senderRegion")}
+                  defaultValue="Pick a browser"
+                  className="select input input-sm w-full"
+                >
+                  <option disabled={true} defaultValue={"Pick a Region"}>
+                    Pick a Region
+                  </option>
+                  {regions.map((r, i) => (
+                    <option value={r} key={i}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
               {/* sender district */}
-              <div>
-                <label className="label text-sm font-bold text-secondary">
+              <fieldset className="fieldset">
+                <legend className="label text-sm font-bold text-secondary">
                   Sender District
-                </label>
-
-                <div className="relative">
-                  <input
-                    type="text"
-                    {...register("senderDistrict", { required: true })}
-                    value={senderDistrict}
-                    onChange={(e) => {
-                      setSenderDistrict(e.target.value);
-                      setShowSenderDistricts(true);
-                    }}
-                    onFocus={() => setShowSenderDistricts(true)}
-                    placeholder="Search sender district"
-                    className="input input-bordered w-full"
-                  />
-
-                  {showSenderDistricts && (
-                    <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
-                      <div className="max-h-60 overflow-y-auto">
-                        {filteredSenderDistricts.length > 0 ? (
-                          filteredSenderDistricts.map((item) => (
-                            <button
-                              type="button"
-                              key={item}
-                              onClick={() => handleSenderDistrictSelect(item)}
-                              className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                            >
-                              {item}
-                            </button>
-                          ))
-                        ) : (
-                          <p className="px-4 py-3 text-gray-500">
-                            District not found
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+                </legend>
+                <select
+                  defaultValue="Pick a district"
+                  className="select input input-sm w-full"
+                >
+                  <option
+                    {...register("senderDistrict")}
+                    disabled={true}
+                    defaultValue={"Pick a district"}
+                  >
+                    Pick a Region
+                  </option>
+                  {districtsByRegion(senderRegion).map((r, i) => (
+                    <option value={r} key={i}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
               {/* sender instruction */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
@@ -303,7 +317,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="email"
-                  {...register("senderEmail", { required: true })}
+                  {...register("receiverEmail", { required: true })}
                   placeholder="Sender Email"
                   className="input input-sm w-full"
                 />
@@ -332,50 +346,49 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
-              {/* receiver district */}
-              <div>
-                <label className="label text-sm font-bold text-secondary">
+              {/* Receiver Region */}
+              <fieldset className="fieldset">
+                <legend className="label text-sm font-bold text-secondary">
+                  Receiver Region
+                </legend>
+                <select
+                  {...register("receiverRegion")}
+                  defaultValue="Pick a browser"
+                  className="select input input-sm w-full"
+                >
+                  <option disabled={true} defaultValue={"Pick a Region"}>
+                    Pick a Region
+                  </option>
+                  {regions.map((r, i) => (
+                    <option value={r} key={i}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+              {/* Receiver district */}
+              <fieldset className="fieldset">
+                <legend className="label text-sm font-bold text-secondary">
                   Receiver District
-                </label>
-
-                <div className="relative">
-                  <input
-                    type="text"
-                    {...register("receiverDistrict", { required: true })}
-                    value={receiverDistrict}
-                    onChange={(e) => {
-                      setReceiverDistrict(e.target.value);
-                      setShowReceiverDistricts(true);
-                    }}
-                    onFocus={() => setShowReceiverDistricts(true)}
-                    placeholder="Search receiver district"
-                    className="input input-bordered w-full"
-                  />
-
-                  {showReceiverDistricts && (
-                    <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
-                      <div className="max-h-60 overflow-y-auto">
-                        {filteredReceiverDistricts.length > 0 ? (
-                          filteredReceiverDistricts.map((item) => (
-                            <button
-                              type="button"
-                              key={item}
-                              onClick={() => handleReceiverDistrictSelect(item)}
-                              className="block w-full px-4 py-2 text-left hover:bg-gray-100"
-                            >
-                              {item}
-                            </button>
-                          ))
-                        ) : (
-                          <p className="px-4 py-3 text-gray-500">
-                            District not found
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+                </legend>
+                <select
+                  defaultValue="Pick a district"
+                  className="select input input-sm w-full"
+                >
+                  <option
+                    {...register("receiverDistrict")}
+                    disabled={true}
+                    defaultValue={"Pick a district"}
+                  >
+                    Pick a Region
+                  </option>
+                  {districtsByRegion(receiverRegion).map((r, i) => (
+                    <option value={r} key={i}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
               {/* receiver instruction */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
