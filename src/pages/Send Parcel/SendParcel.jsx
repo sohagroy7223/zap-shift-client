@@ -99,6 +99,10 @@ const SendParcel = () => {
     setReceiverDistrict(value);
     setShowReceiverDistricts(false);
   };
+
+  const handelFromSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className="space-y-3">
       <div className="space-y-2">
@@ -107,14 +111,29 @@ const SendParcel = () => {
           Enter your parcel details
         </h3>
       </div>
-      <form className="space-y-5">
+      <form
+        onSubmit={handleSubmit(handelFromSubmit)}
+        className="space-y-5 border p-5"
+      >
         {/* document filed  */}
         <div className="flex gap-6">
           <div className="flex justify-center items-center gap-2">
-            <input type="radio" name="document" id="" /> Dcument
+            <input
+              type="radio"
+              {...register("parcel")}
+              value="document"
+              defaultChecked
+              id=""
+            />{" "}
+            Document
           </div>
           <div className="flex justify-center items-center gap-2">
-            <input type="radio" name="document" id="" />
+            <input
+              type="radio"
+              {...register("parcel")}
+              value="non-document"
+              id=""
+            />
             not-Document
           </div>
         </div>
@@ -127,16 +146,18 @@ const SendParcel = () => {
             </label>
             <input
               type="text"
+              {...register("parcelName", { required: true })}
               placeholder="Parcel Name"
               className="input input-sm w-full"
             />
           </div>
           <div className="w-6/12">
             <label className="label text-sm font-bold text-secondary">
-              Parcel Name
+              Parcel Wait (kg)
             </label>
             <input
-              type="text"
+              type="number"
+              {...register("parcelWait", { required: true })}
               placeholder="Parcel Name"
               className="input input-sm w-full"
             />
@@ -156,6 +177,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("senderName", { required: true })}
                   placeholder="Sender Name"
                   className="input input-sm w-full"
                 />
@@ -166,6 +188,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("senderAddress", { required: true })}
                   placeholder="Address"
                   className="input input-sm w-full"
                 />
@@ -176,6 +199,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="number"
+                  {...register("senderPhone", { required: true })}
                   placeholder="Sender Phone No"
                   className="input input-sm w-full"
                 />
@@ -188,6 +212,7 @@ const SendParcel = () => {
                 <div className="relative">
                   <input
                     type="text"
+                    {...register("senderDistrict", { required: true })}
                     value={senderDistrict}
                     onChange={(e) => {
                       setSenderDistrict(e.target.value);
@@ -198,7 +223,7 @@ const SendParcel = () => {
                     className="input input-bordered w-full"
                   />
 
-                  {showSenderDistricts ? (
+                  {showSenderDistricts && (
                     <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
                       <div className="max-h-60 overflow-y-auto">
                         {filteredSenderDistricts.length > 0 ? (
@@ -219,8 +244,6 @@ const SendParcel = () => {
                         )}
                       </div>
                     </div>
-                  ) : (
-                    ""
                   )}
                 </div>
               </div>
@@ -231,7 +254,7 @@ const SendParcel = () => {
                 <div>
                   <textarea
                     className="border w-12/12 p-2 text-md rounded-sm"
-                    name=""
+                    {...register("senderInstruction", { required: true })}
                     placeholder="text"
                     id=""
                   ></textarea>
@@ -251,6 +274,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("receiverName", { required: true })}
                   placeholder="Receiver Name"
                   className="input input-sm w-full"
                 />
@@ -261,6 +285,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  {...register("receiverAddress", { required: true })}
                   placeholder="Address"
                   className="input input-sm w-full"
                 />
@@ -271,6 +296,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="number"
+                  {...register("receiverNumber", { required: true })}
                   placeholder="Receiver Contact No"
                   className="input input-sm w-full"
                 />
@@ -283,6 +309,7 @@ const SendParcel = () => {
                 <div className="relative">
                   <input
                     type="text"
+                    {...register("receiverDistrict", { required: true })}
                     value={receiverDistrict}
                     onChange={(e) => {
                       setReceiverDistrict(e.target.value);
@@ -293,7 +320,7 @@ const SendParcel = () => {
                     className="input input-bordered w-full"
                   />
 
-                  {showReceiverDistricts ? (
+                  {showReceiverDistricts && (
                     <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
                       <div className="max-h-60 overflow-y-auto">
                         {filteredReceiverDistricts.length > 0 ? (
@@ -314,8 +341,6 @@ const SendParcel = () => {
                         )}
                       </div>
                     </div>
-                  ) : (
-                    ""
                   )}
                 </div>
               </div>
@@ -326,7 +351,7 @@ const SendParcel = () => {
                 <div>
                   <textarea
                     className="border w-12/12 p-2 text-md rounded-sm"
-                    name=""
+                    {...register("receiverInstruction", { required: true })}
                     placeholder="text"
                     id=""
                   ></textarea>
@@ -334,6 +359,13 @@ const SendParcel = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="flex justify-center">
+          <input
+            type="submit"
+            value="send parcel"
+            className="text-secondary bg-primary fond-bold btn "
+          />
         </div>
       </form>
     </div>
