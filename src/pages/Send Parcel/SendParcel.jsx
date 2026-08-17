@@ -113,7 +113,7 @@ const SendParcel = () => {
       </div>
       <form
         onSubmit={handleSubmit(handelFromSubmit)}
-        className="space-y-5 border p-5"
+        className="space-y-5 border p-5 rounded-2xl bg-gray-50"
       >
         {/* document filed  */}
         <div className="flex gap-6">
@@ -139,7 +139,7 @@ const SendParcel = () => {
         </div>
         {/* parcel info */}
 
-        <div className="fieldset flex gap-4">
+        <div className="fieldset flex gap-8 py-3">
           <div className="w-6/12">
             <label className="label text-sm font-bold text-secondary">
               Parcel Name
@@ -165,12 +165,12 @@ const SendParcel = () => {
         </div>
 
         {/* 2 Column*/}
-        <div className="flex gap-4">
+        <div className="flex gap-8">
           {/* sender details */}
           <div className="fieldset w-6/12">
             <h3 className="text-lg font-bold text-secondary">Sender Details</h3>
-
             <div className="space-y-2">
+              {/* sender name */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Sender Name
@@ -182,6 +182,19 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* sender email */}
+              <div>
+                <label className="label text-sm font-bold text-secondary">
+                  Sender Email
+                </label>
+                <input
+                  type="email"
+                  {...register("senderEmail", { required: true })}
+                  placeholder="Sender Email"
+                  className="input input-sm w-full"
+                />
+              </div>
+              {/* sender address */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Sender Address
@@ -193,6 +206,7 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* sender mobile */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Sender Phone No
@@ -204,6 +218,7 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* sender district */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Sender District
@@ -247,6 +262,7 @@ const SendParcel = () => {
                   )}
                 </div>
               </div>
+              {/* sender instruction */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Pickup Instruction
@@ -268,6 +284,7 @@ const SendParcel = () => {
               Receiver Details
             </h3>
             <div className="space-y-2">
+              {/* receiver  name*/}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Receiver Name
@@ -279,6 +296,19 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* receiver email */}
+              <div>
+                <label className="label text-sm font-bold text-secondary">
+                  receiver Email
+                </label>
+                <input
+                  type="email"
+                  {...register("senderEmail", { required: true })}
+                  placeholder="Sender Email"
+                  className="input input-sm w-full"
+                />
+              </div>
+              {/* receiver address */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Receiver Address
@@ -290,6 +320,7 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* receiver mobile */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Receiver Contact No
@@ -301,6 +332,7 @@ const SendParcel = () => {
                   className="input input-sm w-full"
                 />
               </div>
+              {/* receiver district */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Receiver District
@@ -344,6 +376,7 @@ const SendParcel = () => {
                   )}
                 </div>
               </div>
+              {/* receiver instruction */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
                   Delivery Instruction
