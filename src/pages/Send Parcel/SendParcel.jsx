@@ -76,16 +76,28 @@ const SendParcel = () => {
     "Thakurgaon",
   ];
 
-  const [district, setDistrict] = useState("");
-  const [showDistricts, setShowDistricts] = useState(false);
+  const [senderDistrict, setSenderDistrict] = useState("");
+  const [receiverDistrict, setReceiverDistrict] = useState("");
 
-  const filteredDistricts = districts.filter((item) =>
-    item.toLowerCase().includes(district.toLowerCase()),
+  const [showSenderDistricts, setShowSenderDistricts] = useState(false);
+  const [showReceiverDistricts, setShowReceiverDistricts] = useState(false);
+
+  const filteredSenderDistricts = districts.filter((item) =>
+    item.toLowerCase().includes(senderDistrict.toLowerCase()),
   );
 
-  const handleDistrictSelect = (value) => {
-    setDistrict(value);
-    setShowDistricts(false);
+  const filteredReceiverDistricts = districts.filter((item) =>
+    item.toLowerCase().includes(receiverDistrict.toLowerCase()),
+  );
+
+  const handleSenderDistrictSelect = (value) => {
+    setSenderDistrict(value);
+    setShowSenderDistricts(false);
+  };
+
+  const handleReceiverDistrictSelect = (value) => {
+    setReceiverDistrict(value);
+    setShowReceiverDistricts(false);
   };
   return (
     <div className="space-y-3">
@@ -150,7 +162,7 @@ const SendParcel = () => {
               </div>
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Address
+                  Sender Address
                 </label>
                 <input
                   type="text"
@@ -170,30 +182,31 @@ const SendParcel = () => {
               </div>
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Your District
+                  Sender District
                 </label>
+
                 <div className="relative">
                   <input
                     type="text"
-                    value={district}
+                    value={senderDistrict}
                     onChange={(e) => {
-                      setDistrict(e.target.value);
-                      setShowDistricts(true);
+                      setSenderDistrict(e.target.value);
+                      setShowSenderDistricts(true);
                     }}
-                    onFocus={() => setShowDistricts(true)}
-                    placeholder="Search district"
+                    onFocus={() => setShowSenderDistricts(true)}
+                    placeholder="Search sender district"
                     className="input input-bordered w-full"
                   />
 
-                  {showDistricts && (
+                  {showSenderDistricts ? (
                     <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
                       <div className="max-h-60 overflow-y-auto">
-                        {filteredDistricts.length > 0 ? (
-                          filteredDistricts.map((item) => (
+                        {filteredSenderDistricts.length > 0 ? (
+                          filteredSenderDistricts.map((item) => (
                             <button
                               type="button"
                               key={item}
-                              onClick={() => handleDistrictSelect(item)}
+                              onClick={() => handleSenderDistrictSelect(item)}
                               className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                             >
                               {item}
@@ -206,6 +219,8 @@ const SendParcel = () => {
                         )}
                       </div>
                     </div>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>
@@ -264,28 +279,29 @@ const SendParcel = () => {
                 <label className="label text-sm font-bold text-secondary">
                   Receiver District
                 </label>
+
                 <div className="relative">
                   <input
                     type="text"
-                    value={district}
+                    value={receiverDistrict}
                     onChange={(e) => {
-                      setDistrict(e.target.value);
-                      setShowDistricts(true);
+                      setReceiverDistrict(e.target.value);
+                      setShowReceiverDistricts(true);
                     }}
-                    onFocus={() => setShowDistricts(true)}
-                    placeholder="Search district"
+                    onFocus={() => setShowReceiverDistricts(true)}
+                    placeholder="Search receiver district"
                     className="input input-bordered w-full"
                   />
 
-                  {showDistricts && (
+                  {showReceiverDistricts ? (
                     <div className="absolute z-50 mt-1 w-full rounded-lg border bg-white shadow-lg">
                       <div className="max-h-60 overflow-y-auto">
-                        {filteredDistricts.length > 0 ? (
-                          filteredDistricts.map((item) => (
+                        {filteredReceiverDistricts.length > 0 ? (
+                          filteredReceiverDistricts.map((item) => (
                             <button
                               type="button"
                               key={item}
-                              onClick={() => handleDistrictSelect(item)}
+                              onClick={() => handleReceiverDistrictSelect(item)}
                               className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                             >
                               {item}
@@ -298,6 +314,8 @@ const SendParcel = () => {
                         )}
                       </div>
                     </div>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>
