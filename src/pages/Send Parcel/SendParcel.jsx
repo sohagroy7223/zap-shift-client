@@ -259,15 +259,12 @@ const SendParcel = () => {
                   Sender District
                 </legend>
                 <select
+                  {...register("senderDistrict")}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
-                  <option
-                    {...register("senderDistrict")}
-                    disabled={true}
-                    defaultValue={"Pick a district"}
-                  >
-                    Pick a Region
+                  <option disabled={true} defaultValue={"Pick a mg"}>
+                    Pick a gp
                   </option>
                   {districtsByRegion(senderRegion).map((r, i) => (
                     <option value={r} key={i}>
@@ -356,9 +353,7 @@ const SendParcel = () => {
                   defaultValue="Pick a browser"
                   className="select input input-sm w-full"
                 >
-                  <option disabled={true} defaultValue={"Pick a Region"}>
-                    Pick a Region
-                  </option>
+                  <option>Pick a Region</option>
                   {regions.map((r, i) => (
                     <option value={r} key={i}>
                       {r}
@@ -372,16 +367,14 @@ const SendParcel = () => {
                   Receiver District
                 </legend>
                 <select
+                  {...register("receiverDistrict")}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
                   <option
-                    {...register("receiverDistrict")}
                     disabled={true}
                     defaultValue={"Pick a district"}
-                  >
-                    Pick a Region
-                  </option>
+                  ></option>
                   {districtsByRegion(receiverRegion).map((r, i) => (
                     <option value={r} key={i}>
                       {r}
