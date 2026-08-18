@@ -2,6 +2,8 @@ import { useState } from "react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SendParcel = () => {
   const servicesCenter = useLoaderData();
@@ -12,6 +14,8 @@ const SendParcel = () => {
     getValues,
     formState: { errors },
   } = useForm();
+
+  const axiosSecure = useAxiosSecure();
 
   const senderRegion = watch("senderRegion");
   const receiverRegion = watch("receiverRegion");
@@ -137,8 +141,29 @@ const SendParcel = () => {
       }
     }
     console.log("totalCost", cost);
+    Swal.fire({
+      title: "agree with the cost ?",
+      text: `You will be charged! ${cost} taka`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes I agree",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log("after post ", res.data);
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "add your parcel!",
+              text: "Your parcel has been added.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
   };
-
   return (
     <div className="space-y-3">
       <div className="space-y-2">
