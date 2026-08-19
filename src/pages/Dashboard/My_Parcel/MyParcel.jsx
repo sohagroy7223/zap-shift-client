@@ -44,8 +44,6 @@ const MyParcel = () => {
           </tbody>
         </table>
       </div>
-      ))
-      <h3>my parcel component {parcels.length} </h3>
     </div>
   );
 };

@@ -85,7 +85,7 @@ const NavBar = () => {
                 isActive ? "mr-4 font-bold bg-primary " : "mr-4"
               }
             >
-              Dashboard
+              My Parcels
             </NavLink>
           </li>
         </>
