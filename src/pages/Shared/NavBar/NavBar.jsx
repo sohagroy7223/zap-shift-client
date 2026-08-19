@@ -76,6 +76,16 @@ const NavBar = () => {
           Send Parcel
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="dashboard/myParcels"
+          className={({ isActive, isPending }) =>
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
     </>
   );
   return (
