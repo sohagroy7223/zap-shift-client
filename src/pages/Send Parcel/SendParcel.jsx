@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
 const SendParcel = () => {
+  const { user } = useAuth();
   const servicesCenter = useLoaderData();
   const {
     register,
@@ -119,7 +121,7 @@ const SendParcel = () => {
   //   };
 
   const handelFromSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     const isDocument = data.parcel === "document";
     const isSameDistrict = data.senderDistrict === data.receiverDistrict;
     const parcelWeight = parseFloat(data.parcelWait);
@@ -238,6 +240,7 @@ const SendParcel = () => {
                 </label>
                 <input
                   type="text"
+                  defaultValue={user?.displayName}
                   {...register("senderName", { required: true })}
                   placeholder="Sender Name"
                   className="input input-sm w-full"
@@ -249,6 +252,7 @@ const SendParcel = () => {
                   Sender Email
                 </label>
                 <input
+                  defaultValue={user?.email}
                   type="email"
                   {...register("senderEmail", { required: true })}
                   placeholder="Sender Email"
