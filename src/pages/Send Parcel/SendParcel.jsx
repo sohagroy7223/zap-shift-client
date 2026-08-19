@@ -127,6 +127,7 @@ const SendParcel = () => {
     const parcelWeight = parseFloat(data.parcelWait);
     let cost = 0;
 
+    data.date = new Date();
     if (isDocument) {
       cost = isSameDistrict ? 60 : 80;
     } else {
@@ -142,7 +143,9 @@ const SendParcel = () => {
         cost = minCharge + extraCharge;
       }
     }
+
     console.log("totalCost", cost);
+    data.cost = cost;
     Swal.fire({
       title: "agree with the cost ?",
       text: `You will be charged! ${cost} taka`,
@@ -221,7 +224,7 @@ const SendParcel = () => {
             <input
               type="number"
               {...register("parcelWait", { required: true })}
-              placeholder="Parcel Name"
+              placeholder="Parcel weight(kg)"
               className="input input-sm w-full"
             />
           </div>

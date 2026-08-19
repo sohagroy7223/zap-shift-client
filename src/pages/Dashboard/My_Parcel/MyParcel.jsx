@@ -15,9 +15,36 @@ const MyParcel = () => {
       return res.data;
     },
   });
-  console.log(parcels);
+
   return (
     <div className="px-5">
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {parcels.map((parcel, index) => (
+              <tr>
+                <th>{index + 1}</th>
+                <td>{parcel.parcelName}</td>
+                <td>{parcel.cost}</td>
+                <td className="flex gap-2">
+                  <button className="btn">Edit</button>
+                  <button className="btn">delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      ))
       <h3>my parcel component {parcels.length} </h3>
     </div>
   );
