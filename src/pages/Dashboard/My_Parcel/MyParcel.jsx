@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { MdOutlineSearch } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const MyParcel = () => {
   const { user } = useAuth();
@@ -18,6 +19,31 @@ const MyParcel = () => {
       return res.data;
     },
   });
+
+  const handelDeleteParcel = (id) => {
+    console.log("delete this data", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/parcels/${id}`).then((res) => {
+          if (res.data.deletedCount) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div className="px-5">
@@ -47,7 +73,10 @@ const MyParcel = () => {
                   <button className="btn btn-square">
                     <FiEdit size={18} />
                   </button>
-                  <button className="btn">
+                  <button
+                    onClick={() => handelDeleteParcel(parcel._id)}
+                    className="btn"
+                  >
                     <RiDeleteBinLine size={18} />
                   </button>
                 </td>
