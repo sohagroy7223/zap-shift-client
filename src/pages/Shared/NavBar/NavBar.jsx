@@ -66,18 +66,18 @@ const NavBar = () => {
           Coverage
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/send-parcel"
-          className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
-          }
-        >
-          Send Parcel
-        </NavLink>
-      </li>
       {user && (
         <>
+          <li>
+            <NavLink
+              to="/send-parcel"
+              className={({ isActive, isPending }) =>
+                isActive ? "mr-4 font-bold bg-primary " : "mr-4"
+              }
+            >
+              Send Parcel
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="dashboard/myParcels"

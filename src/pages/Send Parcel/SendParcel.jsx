@@ -136,7 +136,7 @@ const SendParcel = () => {
       } else {
         const minCharge = isSameDistrict ? 110 : 150;
         const extraWeight = parcelWeight - 3;
-        console.log(extraWeight);
+        // console.log(extraWeight);
         const extraCharge = isSameDistrict
           ? extraWeight * 40
           : extraWeight * 40 + 40;
@@ -255,8 +255,8 @@ const SendParcel = () => {
                   Sender Email
                 </label>
                 <input
-                  defaultValue={user?.email}
                   type="email"
+                  defaultValue={user?.email}
                   {...register("senderEmail", { required: true })}
                   placeholder="Sender Email"
                   className="input input-sm w-full"
