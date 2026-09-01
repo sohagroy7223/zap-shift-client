@@ -127,7 +127,6 @@ const SendParcel = () => {
     const parcelWeight = parseFloat(data.parcelWait);
     let cost = 0;
 
-    data.date = new Date();
     if (isDocument) {
       cost = isSameDistrict ? 60 : 80;
     } else {
@@ -144,8 +143,10 @@ const SendParcel = () => {
       }
     }
 
-    console.log("totalCost", cost);
+    // console.log("totalCost", cost);
     data.cost = cost;
+    data.createdAt = new Date();
+
     Swal.fire({
       title: "agree with the cost ?",
       text: `You will be charged! ${cost} taka`,
@@ -157,7 +158,7 @@ const SendParcel = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.post("/parcels", data).then((res) => {
-          console.log("after post ", res.data);
+          // console.log("after post ", res.data);
           if (res.data.insertedId) {
             Swal.fire({
               title: "add your parcel!",
