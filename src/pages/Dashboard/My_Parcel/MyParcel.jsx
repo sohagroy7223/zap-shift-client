@@ -12,7 +12,7 @@ const MyParcel = () => {
 
   const axiosInstance = useAxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch } = useQuery({
     queryKey: ["myParcel", user?.email],
     queryFn: async () => {
       const res = await axiosInstance.get(`/parcels?email=${user.email}`);
@@ -33,6 +33,7 @@ const MyParcel = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosInstance.delete(`/parcels/${id}`).then((res) => {
+          refetch();
           if (res.data.deletedCount) {
             Swal.fire({
               title: "Deleted!",
@@ -67,15 +68,15 @@ const MyParcel = () => {
                 <td>{parcel.cost}</td>
                 <td>{parcel.status}</td>
                 <td className="flex gap-2">
-                  <button className="btn btn-square">
+                  <button className="btn btn-square hover:bg-primary">
                     <MdOutlineSearch size={25} />
                   </button>
-                  <button className="btn btn-square">
+                  <button className="btn btn-square hover:bg-primary">
                     <FiEdit size={18} />
                   </button>
                   <button
                     onClick={() => handelDeleteParcel(parcel._id)}
-                    className="btn"
+                    className="btn btn-square hover:bg-primary"
                   >
                     <RiDeleteBinLine size={18} />
                   </button>
