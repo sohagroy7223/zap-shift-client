@@ -48,7 +48,7 @@ const MyParcel = () => {
   };
 
   return (
-    <div className="px-5">
+    <div>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}

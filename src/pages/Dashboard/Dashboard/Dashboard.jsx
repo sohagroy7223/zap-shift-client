@@ -5,7 +5,7 @@ import DashboardNav from "../DashbordNav/DashboardNav";
 
 const Dashboard = () => {
   return (
-    <div className="max-w-11/12 mx-auto h-max ">
+    <div className="max-w-11/12 mx-auto h-max">
       <DashboardNav></DashboardNav>
       <div className="drawer lg:drawer-open">
         <input
@@ -40,7 +40,9 @@ const Dashboard = () => {
             <div className="">Zap Shift Dashboard</div>
           </nav>
           {/* Page content here */}
-          <Outlet></Outlet>
+          <div className="px-3">
+            <Outlet></Outlet>
+          </div>
         </div>
 
         <div className="drawer-side is-drawer-close:overflow-visible">
