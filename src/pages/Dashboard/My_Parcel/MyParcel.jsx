@@ -6,6 +6,7 @@ import { MdOutlineSearch } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcel = () => {
   const { user } = useAuth();
@@ -56,7 +57,8 @@ const MyParcel = () => {
               <th>No</th>
               <th>Name</th>
               <th>Cost</th>
-              <th>Status</th>
+              <th>Payment</th>
+              <th>Delivery Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -66,7 +68,19 @@ const MyParcel = () => {
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.cost}</td>
-                <td>{parcel.status}</td>
+                <td>
+                  {parcel.paymentStatus === "paid" ? (
+                    <span className="text-green-400 btn btn-sm">Paid</span>
+                  ) : (
+                    <Link
+                      to={`/dashboard/payment/${parcel._id}`}
+                      className="btn btn-primary text-secondary btn-sm"
+                    >
+                      Pay
+                    </Link>
+                  )}
+                </td>
+                <td>{parcel.deliveryStatus}</td>
                 <td className="flex gap-2">
                   <button className="btn btn-square hover:bg-primary">
                     <MdOutlineSearch size={25} />
