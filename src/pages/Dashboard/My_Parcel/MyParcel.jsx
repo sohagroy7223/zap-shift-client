@@ -21,6 +21,21 @@ const MyParcel = () => {
     },
   });
 
+  const handelPayment = async (parcel) => {
+    const paymentInfo = {
+      cost: parcel.cost,
+      parcelId: parcel._id,
+      senderEmail: parcel.senderEmail,
+      parcelName: parcel.parcelName,
+    };
+    const res = await axiosInstance.post(
+      "/payment-checkout-section",
+      paymentInfo,
+    );
+    console.log(res.data.url);
+    window.location.href = res.data.url;
+  };
+
   const handelDeleteParcel = (id) => {
     console.log("delete this data", id);
     Swal.fire({
@@ -72,12 +87,12 @@ const MyParcel = () => {
                   {parcel.paymentStatus === "paid" ? (
                     <span className="text-green-400 btn btn-sm">Paid</span>
                   ) : (
-                    <Link
-                      to={`/dashboard/payment/${parcel._id}`}
+                    <button
+                      onClick={() => handelPayment(parcel)}
                       className="btn btn-primary text-secondary btn-sm"
                     >
                       Pay
-                    </Link>
+                    </button>
                   )}
                 </td>
                 <td>{parcel.deliveryStatus}</td>
