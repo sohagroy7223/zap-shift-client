@@ -1,13 +1,14 @@
 import { useState } from "react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
 
 const SendParcel = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const servicesCenter = useLoaderData();
   const {
     register,
@@ -156,6 +157,7 @@ const SendParcel = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes I agree",
     }).then((result) => {
+      navigate("/dashboard/myParcels");
       if (result.isConfirmed) {
         axiosSecure.post("/parcels", data).then((res) => {
           // console.log("after post ", res.data);
