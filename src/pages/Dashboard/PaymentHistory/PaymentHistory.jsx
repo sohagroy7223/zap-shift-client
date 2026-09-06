@@ -16,7 +16,7 @@ const PaymentHistory = () => {
     },
   });
 
-  console.log(parcels);
+  //   console.log(parcels);
 
   return (
     <div>
@@ -29,6 +29,7 @@ const PaymentHistory = () => {
               <th>No</th>
               <th>Parcel Info</th>
               <th>Tracking Number</th>
+              <th>Date</th>
               <th>Payment</th>
               <th>Action</th>
             </tr>
@@ -40,6 +41,7 @@ const PaymentHistory = () => {
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.trackingId}</td>
+                <td>{new Date(parcel.paidAt).toLocaleString()}</td>
                 <td>${parcel.amount} (paid)</td>
                 <td className="btn bg-white btn-sm ">view</td>
               </tr>
