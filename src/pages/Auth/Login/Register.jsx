@@ -1,15 +1,16 @@
-import { pattern } from "framer-motion/client";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
 import SocialLogin from "../../../Components/SocialLogin/SocialLogin";
 import axios from "axios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const { createUser, updateUserProfile, verificationEmail } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -21,7 +22,7 @@ const Register = () => {
     // console.log(data.image[0]);
     const profileImage = data.image[0];
     createUser(data.email, data.password)
-      .then((result) => {
+      .then(() => {
         // console.log(result);
         // store image and get the photoURL
         const formData = new FormData();
@@ -33,9 +34,19 @@ const Register = () => {
         axios.post(image_API_URL, formData).then((res) => {
           const image = res.data.data.url;
           // console.log(" after get image", image);
+
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: image,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            console.log(res.data);
+          });
+
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: image,
           };
           updateUserProfile(userProfile)
             .then(() => {
