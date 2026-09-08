@@ -219,6 +219,9 @@ const SendParcel = () => {
               placeholder="Parcel Name"
               className="input input-sm w-full"
             />
+            {errors.parcelName?.type === "required" && (
+              <p className="text-red-500">Parcel Name Field is Required</p>
+            )}
           </div>
           <div className="w-6/12">
             <label className="label text-sm font-bold text-secondary">
@@ -230,6 +233,9 @@ const SendParcel = () => {
               placeholder="Parcel weight(kg)"
               className="input input-sm w-full"
             />
+            {errors.parcelWait?.type === "required" && (
+              <p className="text-red-500">parcel weight Field is Required</p>
+            )}
           </div>
         </div>
 
@@ -251,6 +257,9 @@ const SendParcel = () => {
                   placeholder="Sender Name"
                   className="input input-sm w-full"
                 />
+                {errors.senderName?.type === "required" && (
+                  <p className="text-red-500">Name Field is Required</p>
+                )}
               </div>
               {/* sender email */}
               <div>
@@ -264,6 +273,9 @@ const SendParcel = () => {
                   placeholder="Sender Email"
                   className="input input-sm w-full"
                 />
+                {errors.senderEmail?.type === "required" && (
+                  <p className="text-red-500">email Field is Required</p>
+                )}
               </div>
               {/* sender address */}
               <div>
@@ -276,6 +288,9 @@ const SendParcel = () => {
                   placeholder="Address"
                   className="input input-sm w-full"
                 />
+                {errors.senderAddress?.type === "required" && (
+                  <p className="text-red-500">Address Field is Required</p>
+                )}
               </div>
               {/* sender mobile */}
               <div>
@@ -288,15 +303,18 @@ const SendParcel = () => {
                   placeholder="Sender Phone No"
                   className="input input-sm w-full"
                 />
+                {errors.senderPhone?.type === "required" && (
+                  <p className="text-red-500">Phone number Field is Required</p>
+                )}
               </div>
               {/* sender Region */}
               <fieldset className="fieldset">
                 <legend className="label text-sm font-bold text-secondary">
-                  Sender Region
+                  sender Region
                 </legend>
                 <select
                   {...register("senderRegion")}
-                  defaultValue="Pick a browser"
+                  defaultValue="Pick a Region"
                   className="select input input-sm w-full"
                 >
                   <option disabled={true} defaultValue={"Pick a Region"}>
@@ -308,6 +326,9 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.senderRegion?.type === "required" && (
+                  <p className="text-red-500">Region Field is Required</p>
+                )}
               </fieldset>
               {/* sender district */}
               <fieldset className="fieldset">
@@ -319,8 +340,8 @@ const SendParcel = () => {
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
-                  <option disabled={true} defaultValue={"Pick a mg"}>
-                    Pick a gp
+                  <option disabled={true} defaultValue={"Pick a district"}>
+                    Pick a district
                   </option>
                   {districtsByRegion(senderRegion).map((r, i) => (
                     <option value={r} key={i}>
@@ -328,6 +349,9 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.senderDistrict?.type === "required" && (
+                  <p className="text-red-500">District Field is Required</p>
+                )}
               </fieldset>
               {/* sender instruction */}
               <div>
@@ -339,8 +363,12 @@ const SendParcel = () => {
                     className="border w-12/12 p-2 text-md rounded-sm"
                     {...register("senderInstruction", { required: true })}
                     placeholder="text"
-                    id=""
                   ></textarea>
+                  {errors.senderInstruction?.type === "required" && (
+                    <p className="text-red-500">
+                      Instruction Field is Required
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -362,6 +390,9 @@ const SendParcel = () => {
                   placeholder="Receiver Name"
                   className="input input-sm w-full"
                 />
+                {errors.receiverName?.type === "required" && (
+                  <p className="text-red-500">Name Field is Required</p>
+                )}
               </div>
               {/* receiver email */}
               <div>
@@ -374,6 +405,9 @@ const SendParcel = () => {
                   placeholder="Sender Email"
                   className="input input-sm w-full"
                 />
+                {errors.receiverEmail?.type === "required" && (
+                  <p className="text-red-500">email Field is Required</p>
+                )}
               </div>
               {/* receiver address */}
               <div>
@@ -386,6 +420,9 @@ const SendParcel = () => {
                   placeholder="Address"
                   className="input input-sm w-full"
                 />
+                {errors.receiverAddress?.type === "required" && (
+                  <p className="text-red-500">Address Field is Required</p>
+                )}
               </div>
               {/* receiver mobile */}
               <div>
@@ -398,6 +435,9 @@ const SendParcel = () => {
                   placeholder="Receiver Contact No"
                   className="input input-sm w-full"
                 />
+                {errors.receiverNumber?.type === "required" && (
+                  <p className="text-red-500">Phone number Field is Required</p>
+                )}
               </div>
               {/* Receiver Region */}
               <fieldset className="fieldset">
@@ -416,6 +456,9 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.receiverRegion?.type === "required" && (
+                  <p className="text-red-500">Region Field is Required</p>
+                )}
               </fieldset>
               {/* Receiver district */}
               <fieldset className="fieldset">
@@ -437,6 +480,9 @@ const SendParcel = () => {
                     </option>
                   ))}
                 </select>
+                {errors.receiverDistrict?.type === "required" && (
+                  <p className="text-red-500">Region Field is Required</p>
+                )}
               </fieldset>
               {/* receiver instruction */}
               <div>
@@ -450,6 +496,9 @@ const SendParcel = () => {
                     placeholder="text"
                     id=""
                   ></textarea>
+                  {errors.receiverInstruction?.type === "required" && (
+                    <p className="text-red-500">Region Field is Required</p>
+                  )}
                 </div>
               </div>
             </div>
