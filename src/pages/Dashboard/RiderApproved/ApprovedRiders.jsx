@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const ApprovedRiders = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: riders = [] } = useQuery({
+  const { data: riders = [], refetch } = useQuery({
     queryKey: ["riders", "approved"],
     queryFn: async () => {
       const res = await axiosSecure.get("/riders");
@@ -19,10 +19,10 @@ const ApprovedRiders = () => {
   const handelUpdateRiders = (id, status) => {
     const updateInfo = { status: `${status}` };
     axiosSecure.patch(`/riders/${id}`, updateInfo).then((res) => {
-      console.log(res.data);
+      refetch();
       if (res.data.modifiedCount) {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           icon: "success",
           title: `Rider status set to ${status}`,
           showConfirmButton: false,
@@ -37,6 +37,30 @@ const ApprovedRiders = () => {
   };
   const handelRejectsRider = (id) => {
     handelUpdateRiders(id, "rejected");
+  };
+
+  const handelDeleteRider = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.delete(`/riders/${id}`).then((res) => {
+          refetch();
+          if (res.data.deletedCount) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+    });
   };
 
   return (
@@ -64,7 +88,13 @@ const ApprovedRiders = () => {
                 <td>{rider.email}</td>
                 <td>{rider.district}</td>
                 <td
-                  className={`${rider.status === "approved" ? "text-green-700" : "text-yellow-500"}`}
+                  className={`${
+                    rider.status === "approved"
+                      ? "text-green-700 font-semibold"
+                      : rider.status === "rejected"
+                        ? "text-red-600 font-semibold"
+                        : "text-yellow-400 font-semibold"
+                  }`}
                 >
                   {rider.status}
                 </td>
@@ -81,7 +111,10 @@ const ApprovedRiders = () => {
                   >
                     <IoPersonRemove />
                   </button>
-                  <button className="btn btn-sm">
+                  <button
+                    onClick={() => handelDeleteRider(rider._id)}
+                    className="btn btn-sm"
+                  >
                     <FaTrashAlt />
                   </button>
                 </td>
