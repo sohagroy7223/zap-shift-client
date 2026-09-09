@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import image from "../../assets/agent-pending.png";
+import Swal from "sweetalert2";
 
 const Rider = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ const Rider = () => {
   } = useForm();
 
   const axiosSecure = useAxiosSecure();
-  const riderRegion = watch("riderRegion");
+  const riderRegion = watch("region");
 
   const regionDuplicate = servicesCenter.map((c) => c.region);
   const regions = [...new Set(regionDuplicate)];
@@ -30,26 +31,16 @@ const Rider = () => {
   };
 
   const handelFromSubmit = (data) => {
-    Swal.fire({
-      title: "agree with the cost ?",
-      text: `You will be charged! ${cost} taka`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes I agree",
-    }).then((result) => {
-      navigate("/dashboard/myParcels");
-      if (result.isConfirmed) {
-        axiosSecure.post("/parcels", data).then((res) => {
-          // console.log("after post ", res.data);
-          if (res.data.insertedId) {
-            Swal.fire({
-              title: "add your parcel!",
-              text: "Your parcel has been added.",
-              icon: "success",
-            });
-          }
+    console.log(data);
+    axiosSecure.post("/riders", data).then((res) => {
+      console.log(res.data);
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your application has been submit",
+          showConfirmButton: false,
+          timer: 2000,
         });
       }
     });
@@ -78,16 +69,16 @@ const Rider = () => {
               {/* rider name */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Rider Name
+                  Name
                 </label>
                 <input
                   type="text"
                   defaultValue={user?.displayName}
-                  {...register("riderName", { required: true })}
+                  {...register("name", { required: true })}
                   placeholder="rider Name"
                   className="input input-sm w-full"
                 />
-                {errors.riderName?.type === "required" && (
+                {errors.name?.type === "required" && (
                   <p className="text-red-500">Name Field is Required</p>
                 )}
               </div>
@@ -98,11 +89,11 @@ const Rider = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("riderDriving", { required: true })}
+                  {...register("driving", { required: true })}
                   placeholder="Driving License Number"
                   className="input input-sm w-full"
                 />
-                {errors.riderDriving?.type === "required" && (
+                {errors.driving?.type === "required" && (
                   <p className="text-red-500">
                     Rider Driving Field is Required
                   </p>
@@ -111,56 +102,56 @@ const Rider = () => {
               {/* rider email */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Rider Email
+                  Email
                 </label>
                 <input
                   type="email"
                   defaultValue={user?.email}
-                  {...register("riderEmail", { required: true })}
+                  {...register("email", { required: true })}
                   placeholder="rider Email"
                   className="input input-sm w-full"
                 />
-                {errors.riderEmail?.type === "required" && (
+                {errors.email?.type === "required" && (
                   <p className="text-red-500">email Field is Required</p>
                 )}
               </div>
               {/* rider address */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Rider Address
+                  Address
                 </label>
                 <input
                   type="text"
-                  {...register("riderAddress", { required: true })}
+                  {...register("address", { required: true })}
                   placeholder="Address"
                   className="input input-sm w-full"
                 />
-                {errors.riderAddress?.type === "required" && (
+                {errors.address?.type === "required" && (
                   <p className="text-red-500">Address Field is Required</p>
                 )}
               </div>
               {/* rider mobile */}
               <div>
                 <label className="label text-sm font-bold text-secondary">
-                  Rider Phone No
+                  Phone No
                 </label>
                 <input
                   type="number"
-                  {...register("riderPhone", { required: true })}
+                  {...register("phone", { required: true })}
                   placeholder="rider Phone No"
                   className="input input-sm w-full"
                 />
-                {errors.riderPhone?.type === "required" && (
+                {errors.phone?.type === "required" && (
                   <p className="text-red-500">Phone Number Field is Required</p>
                 )}
               </div>
               {/* rider Region */}
               <fieldset className="fieldset">
                 <legend className="label text-sm font-bold text-secondary">
-                  Rider Region
+                  Region
                 </legend>
                 <select
-                  {...register("riderRegion")}
+                  {...register("region")}
                   defaultValue="Pick a Region"
                   className="select input input-sm w-full"
                 >
@@ -173,17 +164,17 @@ const Rider = () => {
                     </option>
                   ))}
                 </select>
-                {errors.riderRegion?.type === "required" && (
+                {errors.region?.type === "required" && (
                   <p className="text-red-500">Region Field is Required</p>
                 )}
               </fieldset>
               {/* rider district */}
               <fieldset className="fieldset">
                 <legend className="label text-sm font-bold text-secondary">
-                  Rider District
+                  District
                 </legend>
                 <select
-                  {...register("riderDistrict")}
+                  {...register("district")}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
@@ -196,7 +187,7 @@ const Rider = () => {
                     </option>
                   ))}
                 </select>
-                {errors.riderDistrict?.type === "required" && (
+                {errors.district?.type === "required" && (
                   <p className="text-red-500">District Field is Required</p>
                 )}
               </fieldset>
@@ -255,10 +246,10 @@ const Rider = () => {
                 <div>
                   <textarea
                     className="border w-12/12 p-2 text-md rounded-sm"
-                    {...register("riderInstruction", { required: true })}
+                    {...register("Instruction", { required: true })}
                     placeholder="text"
                   ></textarea>
-                  {errors.riderInstruction?.type === "required" && (
+                  {errors.Instruction?.type === "required" && (
                     <p className="text-red-500">comment Field is Required</p>
                   )}
                 </div>
