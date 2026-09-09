@@ -2,6 +2,7 @@ import React from "react";
 import { MdHistory, MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router";
 import DashboardNav from "../DashbordNav/DashboardNav";
+import { FaMotorcycle } from "react-icons/fa";
 
 const Dashboard = () => {
   return (
@@ -97,11 +98,23 @@ const Dashboard = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Payments History"
                 >
-                  {/* Settings icon */}
+                  {/* history icon */}
                   <MdHistory size={20} />
                   <span className="is-drawer-close:hidden">
                     Payments History
                   </span>
+                </Link>
+              </li>
+              {/* List item */}
+              <li>
+                <Link
+                  to="approvedRider"
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Approved riders"
+                >
+                  {/* history icon */}
+                  <FaMotorcycle size={20} />
+                  <span className="is-drawer-close:hidden">Approve Riders</span>
                 </Link>
               </li>
             </ul>
