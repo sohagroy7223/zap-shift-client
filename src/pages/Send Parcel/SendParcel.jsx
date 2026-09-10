@@ -313,7 +313,7 @@ const SendParcel = () => {
                   sender Region
                 </legend>
                 <select
-                  {...register("senderRegion")}
+                  {...register("senderRegion", { required: true })}
                   defaultValue="Pick a Region"
                   className="select input input-sm w-full"
                 >
@@ -336,7 +336,7 @@ const SendParcel = () => {
                   Sender District
                 </legend>
                 <select
-                  {...register("senderDistrict")}
+                  {...register("senderDistrict", { required: true })}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
@@ -445,7 +445,7 @@ const SendParcel = () => {
                   Receiver Region
                 </legend>
                 <select
-                  {...register("receiverRegion")}
+                  {...register("receiverRegion", { required: true })}
                   defaultValue="Pick a browser"
                   className="select input input-sm w-full"
                 >
@@ -466,7 +466,7 @@ const SendParcel = () => {
                   Receiver District
                 </legend>
                 <select
-                  {...register("receiverDistrict")}
+                  {...register("receiverDistrict", { required: true })}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >

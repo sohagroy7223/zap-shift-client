@@ -16,9 +16,9 @@ const ApprovedRiders = () => {
     },
   });
 
-  const handelUpdateRiders = (id, status) => {
-    const updateInfo = { status: `${status}` };
-    axiosSecure.patch(`/riders/${id}`, updateInfo).then((res) => {
+  const handelUpdateRiders = (rider, status) => {
+    const updateInfo = { status: status, email: rider.email };
+    axiosSecure.patch(`/riders/${rider._id}`, updateInfo).then((res) => {
       refetch();
       if (res.data.modifiedCount) {
         Swal.fire({
@@ -32,11 +32,11 @@ const ApprovedRiders = () => {
     });
   };
 
-  const handelApprovedRider = (id) => {
-    handelUpdateRiders(id, "approved");
+  const handelApprovedRider = (rider) => {
+    handelUpdateRiders(rider, "approved");
   };
-  const handelRejectsRider = (id) => {
-    handelUpdateRiders(id, "rejected");
+  const handelRejectsRider = (rider) => {
+    handelUpdateRiders(rider, "rejected");
   };
 
   const handelDeleteRider = (id) => {
@@ -100,13 +100,13 @@ const ApprovedRiders = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handelApprovedRider(rider._id)}
+                    onClick={() => handelApprovedRider(rider)}
                     className="btn btn-sm"
                   >
                     <FaUserCheck />
                   </button>
                   <button
-                    onClick={() => handelRejectsRider(rider._id)}
+                    onClick={() => handelRejectsRider(rider)}
                     className="btn btn-sm"
                   >
                     <IoPersonRemove />

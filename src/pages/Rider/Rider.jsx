@@ -152,7 +152,7 @@ const Rider = () => {
                   Region
                 </legend>
                 <select
-                  {...register("region")}
+                  {...register("region", { required: true })}
                   defaultValue="Pick a Region"
                   className="select input input-sm w-full"
                 >
@@ -175,7 +175,7 @@ const Rider = () => {
                   District
                 </legend>
                 <select
-                  {...register("district")}
+                  {...register("district", { required: true })}
                   defaultValue="Pick a district"
                   className="select input input-sm w-full"
                 >
