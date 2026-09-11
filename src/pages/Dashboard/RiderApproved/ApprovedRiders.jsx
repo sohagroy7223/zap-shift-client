@@ -125,30 +125,34 @@ const ApprovedRiders = () => {
                   {rider.status}
                 </td>
 
-                <td>
+                <td className="flex gap-1">
                   <button
                     onClick={() => openModal(rider)}
-                    className="btn btn-sm"
+                    className="btn btn-sm tooltip hover:btn-primary duration-400"
+                    data-tip="View Rider"
                   >
-                    <FaEye></FaEye>
+                    <FaEye className="text-black" />
                   </button>
                   <button
                     onClick={() => handelApprovedRider(rider)}
-                    className="btn btn-sm"
+                    className="btn btn-sm tooltip hover:btn-primary duration-400"
+                    data-tip="Approved Rider"
                   >
-                    <FaUserCheck />
+                    <FaUserCheck className="text-black" />
                   </button>
                   <button
                     onClick={() => handelRejectsRider(rider)}
-                    className="btn btn-sm"
+                    className="btn btn-sm tooltip hover:btn-primary duration-400"
+                    data-tip="Rejected Rider"
                   >
-                    <IoPersonRemove />
+                    <IoPersonRemove className="text-black" />
                   </button>
                   <button
                     onClick={() => handelDeleteRider(rider._id)}
-                    className="btn btn-sm"
+                    className="btn btn-sm tooltip hover:btn-primary duration-400"
+                    data-tip="Delete Rider"
                   >
-                    <FaTrashAlt />
+                    <FaTrashAlt className="text-black" />
                   </button>
                 </td>
               </tr>
