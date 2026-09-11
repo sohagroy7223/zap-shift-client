@@ -119,14 +119,14 @@ const Dashboard = () => {
               </li>
               <li>
                 <Link
-                  to="approvedRider"
+                  to="user-management"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Users Management"
                 >
                   {/* history icon */}
                   <FaUsers size={20} />
                   <span className="is-drawer-close:hidden">
-                    User Management
+                    Users Management
                   </span>
                 </Link>
               </li>
