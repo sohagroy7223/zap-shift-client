@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
+import { FaEye, FaTrashAlt, FaUserCheck } from "react-icons/fa";
 import { IoPersonRemove } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 const ApprovedRiders = () => {
   const axiosSecure = useAxiosSecure();
+  const [riderDetails, setRiderDetails] = useState([]);
+  const modalRef = useRef(null);
 
   const { data: riders = [], refetch } = useQuery({
     queryKey: ["riders", "approved"],
@@ -63,10 +65,34 @@ const ApprovedRiders = () => {
     });
   };
 
+  const openModal = (rider) => {
+    setRiderDetails(rider);
+    modalRef.current.showModal(rider);
+  };
+
   return (
     <div>
+      <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          Name: {riderDetails.name} <br />
+          Email: {riderDetails.email} <br />
+          driving: {riderDetails.driving} <br />
+          address: {riderDetails.address} <br />
+          region: {riderDetails.region} <br />
+          riderNID: {riderDetails.riderNID} <br />
+          BikeModel: {riderDetails.brandModel} <br />
+          registerNumber: {riderDetails.registerNumber} <br />
+          Instruction: {riderDetails.Instruction} <br />
+          status: {riderDetails.status} <br />
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
       <h3>Rider pending approved page : {riders.length}</h3>
-
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -98,7 +124,14 @@ const ApprovedRiders = () => {
                 >
                   {rider.status}
                 </td>
+
                 <td>
+                  <button
+                    onClick={() => openModal(rider)}
+                    className="btn btn-sm"
+                  >
+                    <FaEye></FaEye>
+                  </button>
                   <button
                     onClick={() => handelApprovedRider(rider)}
                     className="btn btn-sm"
