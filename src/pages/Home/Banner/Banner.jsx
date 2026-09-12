@@ -4,6 +4,7 @@ import banner1 from "../../../assets/banner/banner1.png";
 import banner2 from "../../../assets/banner/banner2.png";
 import banner3 from "../../../assets/banner/banner3.png";
 import { Carousel } from "react-responsive-carousel";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -13,9 +14,9 @@ const Banner = () => {
         <div className="w-6/12 top-88 left-10 absolute z-10 translate-y-1/2">
           <div className="flex gap-3">
             <button className="btn bg-primary">Track Your Parcel</button>
-            <button className="btn btn-outline  hover:bg-primary">
+            <Link to="rider" className="btn btn-outline  hover:bg-primary">
               Be A Rider
-            </button>
+            </Link>
           </div>
         </div>
       </div>

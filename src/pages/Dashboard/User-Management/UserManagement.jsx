@@ -1,17 +1,53 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { FaUserShield } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { FiShieldOff } from "react-icons/fi";
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [] } = useQuery({
+  const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
+
+  const handelMarkedUserRole = (user, role) => {
+    const updateInfo = { role: role };
+    Swal.fire({
+      title: "Are you sure?",
+      text: `${user.displayName} want to be a ${role}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, ${role}`,
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.patch(`/users/${user._id}`, updateInfo).then((res) => {
+          refetch();
+
+          if (res.data.modifiedCount) {
+            Swal.fire({
+              title: `An ${role}!`,
+              text: `${user.displayName} Marked as an ${role}`,
+              icon: "success",
+            });
+          }
+        });
+    });
+  };
+
+  const handelMakeUser = (user) => {
+    handelMarkedUserRole(user, "admin");
+  };
+  const handelMakeAdmin = (user) => {
+    handelMarkedUserRole(user, "user");
+  };
 
   return (
     <div>
@@ -32,7 +68,7 @@ const UserManagement = () => {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr>
+              <tr key={user._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
@@ -52,10 +88,26 @@ const UserManagement = () => {
                 </td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>Admin</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
+                <td className="flex justify-center items-center">
+                  {user.role === "admin" ? (
+                    <button
+                      onClick={() => handelMakeAdmin(user)}
+                      className="btn btn-sm tooltip"
+                      data-tip="remove from admin"
+                    >
+                      <FiShieldOff />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handelMakeUser(user)}
+                      className="btn btn-sm tooltip"
+                      data-tip="add an Admin"
+                    >
+                      <FaUserShield />
+                    </button>
+                  )}
+                </td>
+                <th>Action</th>
               </tr>
             ))}
           </tbody>
