@@ -3,8 +3,10 @@ import { MdHistory, MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router";
 import DashboardNav from "../DashbordNav/DashboardNav";
 import { FaMotorcycle, FaUsers } from "react-icons/fa";
+import useRole from "../../../Hooks/useRole";
 
 const Dashboard = () => {
+  const { role } = useRole();
   return (
     <div className="max-w-11/12 mx-auto h-max">
       <DashboardNav></DashboardNav>
@@ -106,30 +108,36 @@ const Dashboard = () => {
                 </Link>
               </li>
               {/* List item */}
-              <li>
-                <Link
-                  to="approvedRider"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Approved riders"
-                >
-                  {/* history icon */}
-                  <FaMotorcycle size={20} />
-                  <span className="is-drawer-close:hidden">Approve Riders</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="user-management"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Users Management"
-                >
-                  {/* history icon */}
-                  <FaUsers size={20} />
-                  <span className="is-drawer-close:hidden">
-                    Users Management
-                  </span>
-                </Link>
-              </li>
+              {role === "admin" && (
+                <>
+                  <li>
+                    <Link
+                      to="approvedRider"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Approved riders"
+                    >
+                      {/* history icon */}
+                      <FaMotorcycle size={20} />
+                      <span className="is-drawer-close:hidden">
+                        Approve Riders
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="user-management"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Users Management"
+                    >
+                      {/* history icon */}
+                      <FaUsers size={20} />
+                      <span className="is-drawer-close:hidden">
+                        Users Management
+                      </span>
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

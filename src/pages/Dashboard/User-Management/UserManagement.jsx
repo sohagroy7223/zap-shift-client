@@ -82,7 +82,6 @@ const UserManagement = () => {
                     </div>
                     <div>
                       <div className="font-bold">{user.displayName}</div>
-                      <div className="text-sm opacity-50">United States</div>
                     </div>
                   </div>
                 </td>
