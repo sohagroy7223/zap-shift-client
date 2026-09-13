@@ -28,7 +28,7 @@ const UserManagement = () => {
       confirmButtonText: `Yes, ${role}`,
     }).then((result) => {
       if (result.isConfirmed)
-        axiosSecure.patch(`/users/${user._id}`, updateInfo).then((res) => {
+        axiosSecure.patch(`/users/${user._id}/role`, updateInfo).then((res) => {
           refetch();
 
           if (res.data.modifiedCount) {
@@ -91,7 +91,7 @@ const UserManagement = () => {
                   {user.role === "admin" ? (
                     <button
                       onClick={() => handelMakeAdmin(user)}
-                      className="btn btn-sm tooltip"
+                      className="btn btn-sm tooltip bg-red-600"
                       data-tip="remove from admin"
                     >
                       <FiShieldOff />
@@ -99,7 +99,7 @@ const UserManagement = () => {
                   ) : (
                     <button
                       onClick={() => handelMakeUser(user)}
-                      className="btn btn-sm tooltip"
+                      className="btn btn-sm tooltip bg-green-600"
                       data-tip="add an Admin"
                     >
                       <FaUserShield />

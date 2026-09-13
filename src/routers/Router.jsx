@@ -103,7 +103,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "approvedRider",
-        Component: ApprovedRiders,
+        element: (
+          <AdminRoute>
+            <ApprovedRiders></ApprovedRiders>
+          </AdminRoute>
+        ),
       },
       {
         path: "user-management",
