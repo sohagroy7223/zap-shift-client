@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -7,11 +7,16 @@ import { FiShieldOff } from "react-icons/fi";
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
+  const [search, setSearch] = useState("");
 
-  const { refetch, data: users = [] } = useQuery({
-    queryKey: ["users"],
+  const {
+    refetch,
+
+    data: users = [],
+  } = useQuery({
+    queryKey: ["users", search],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?search=${search}`);
       return res.data;
     },
   });
@@ -52,7 +57,32 @@ const UserManagement = () => {
   return (
     <div>
       <h3>management Users : {users.length}</h3>
-
+      <label className="input mt-2">
+        <svg
+          className="h-[1em] opacity-50"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            strokeWidth="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </g>
+        </svg>
+        <input
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          type="search"
+          required
+          placeholder="Search"
+        />
+      </label>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
