@@ -30,7 +30,7 @@ const PaymentHistory = () => {
               <th>Parcel Name</th>
               <th>Amount</th>
               <th>Paid Date</th>
-              <th>transactionId</th>
+              <th>transaction Id</th>
             </tr>
           </thead>
           <tbody>

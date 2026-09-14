@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import DashboardNav from "../DashbordNav/DashboardNav";
 import { FaMotorcycle, FaUsers } from "react-icons/fa";
 import useRole from "../../../Hooks/useRole";
+import { RiEBikeFill } from "react-icons/ri";
 
 const Dashboard = () => {
   const { role } = useRole();
@@ -120,6 +121,19 @@ const Dashboard = () => {
                       <FaMotorcycle size={20} />
                       <span className="is-drawer-close:hidden">
                         Approve Riders
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="assign-riders"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="assign-riders"
+                    >
+                      {/* history icon */}
+                      <RiEBikeFill size={20} />
+                      <span className="is-drawer-close:hidden">
+                        Assign Riders
                       </span>
                     </Link>
                   </li>

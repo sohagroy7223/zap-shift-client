@@ -73,7 +73,7 @@ const MyParcel = () => {
               <th>Name</th>
               <th>Cost</th>
               <th>Payment</th>
-              <th>Tracking id</th>
+              <th>Tracking Id</th>
               <th>Delivery Status</th>
               <th>Action</th>
             </tr>
@@ -97,7 +97,7 @@ const MyParcel = () => {
                   )}
                 </td>
                 <td>{parcel.trackingId}</td>
-                <td>{parcel.deliveryStatus}</td>
+                <td className="">{parcel.deliveryStatus}</td>
                 <td className="flex gap-2">
                   <button className="btn btn-square hover:bg-primary">
                     <MdOutlineSearch size={25} />
