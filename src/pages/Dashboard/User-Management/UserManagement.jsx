@@ -80,7 +80,7 @@ const UserManagement = () => {
           }}
           type="search"
           required
-          placeholder="Search"
+          placeholder="search user"
         />
       </label>
       <div className="overflow-x-auto">
