@@ -27,11 +27,10 @@ const PaymentHistory = () => {
           <thead>
             <tr>
               <th>No</th>
-              <th>Parcel Info</th>
-              <th>Tracking Number</th>
-              <th>Date</th>
-              <th>Payment</th>
-              <th>Action</th>
+              <th>Parcel Name</th>
+              <th>Amount</th>
+              <th>Paid Date</th>
+              <th>transactionId</th>
             </tr>
           </thead>
           <tbody>
@@ -40,10 +39,9 @@ const PaymentHistory = () => {
               <tr key={parcel._id}>
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
-                <td>{parcel.trackingId}</td>
+                <td>$ {parcel.amount}</td>
                 <td>{new Date(parcel.paidAt).toLocaleString()}</td>
-                <td>${parcel.amount} (paid)</td>
-                <td className="btn bg-white btn-sm ">view</td>
+                <td>${parcel.transactionId} (paid)</td>
               </tr>
             ))}
           </tbody>

@@ -37,7 +37,7 @@ const MyParcel = () => {
   };
 
   const handelDeleteParcel = (id) => {
-    console.log("delete this data", id);
+    // console.log("delete this data", id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -73,6 +73,7 @@ const MyParcel = () => {
               <th>Name</th>
               <th>Cost</th>
               <th>Payment</th>
+              <th>Tracking id</th>
               <th>Delivery Status</th>
               <th>Action</th>
             </tr>
@@ -95,6 +96,7 @@ const MyParcel = () => {
                     </button>
                   )}
                 </td>
+                <td>{parcel.trackingId}</td>
                 <td>{parcel.deliveryStatus}</td>
                 <td className="flex gap-2">
                   <button className="btn btn-square hover:bg-primary">

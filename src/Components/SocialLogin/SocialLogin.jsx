@@ -13,14 +13,14 @@ const SocialLogin = () => {
     signInWithGoogle()
       .then((result) => {
         navigate(location?.state || "/");
-        console.log(result.user);
+        // console.log(result.user);
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL,
         };
         axiosSecure.post("/users", userInfo).then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
         });
       })
       .catch((error) => {
