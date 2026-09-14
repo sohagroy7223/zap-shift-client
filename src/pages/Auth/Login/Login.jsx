@@ -21,8 +21,8 @@ const Login = () => {
   const handelSignUser = (data) => {
     setErrorMessage("");
     signInUser(data.email, data.password)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        // console.log(result);
         navigate(location?.state || "/");
       })
       .catch((error) => {

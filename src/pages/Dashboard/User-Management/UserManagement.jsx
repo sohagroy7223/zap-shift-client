@@ -42,10 +42,10 @@ const UserManagement = () => {
     });
   };
 
-  const handelMakeUser = (user) => {
+  const handelMakeAdmin = (user) => {
     handelMarkedUserRole(user, "admin");
   };
-  const handelMakeAdmin = (user) => {
+  const handelRemoveAdmin = (user) => {
     handelMarkedUserRole(user, "user");
   };
 
@@ -90,7 +90,7 @@ const UserManagement = () => {
                 <td className="flex justify-center items-center">
                   {user.role === "admin" ? (
                     <button
-                      onClick={() => handelMakeAdmin(user)}
+                      onClick={() => handelRemoveAdmin(user)}
                       className="btn btn-sm tooltip bg-red-600"
                       data-tip="remove from admin"
                     >
@@ -98,7 +98,7 @@ const UserManagement = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => handelMakeUser(user)}
+                      onClick={() => handelMakeAdmin(user)}
                       className="btn btn-sm tooltip bg-green-600"
                       data-tip="add an Admin"
                     >

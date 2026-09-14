@@ -40,8 +40,8 @@ const Register = () => {
             displayName: data.name,
             photoURL: image,
           };
-          axiosSecure.post("/users", userInfo).then((res) => {
-            console.log(res.data);
+          axiosSecure.post("/users", userInfo).then(() => {
+            // console.log(res.data);
           });
 
           const userProfile = {
