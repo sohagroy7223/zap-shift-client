@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useRef } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AssignRiders = () => {
   const axiosSecure = useAxiosSecure();
+  const riderModalRef = useRef();
+
   const { data: parcels = [] } = useQuery({
     queryKey: ["parcels", "pending-pickup"],
     queryFn: async () => {
@@ -13,7 +15,11 @@ const AssignRiders = () => {
       return res.data;
     },
   });
-  console.log(parcels);
+
+  const handelOpenRiderModal = (parcel) => {
+    riderModalRef.current.showModal();
+  };
+
   return (
     <div>
       <h3>Assign riders : {parcels.length}</h3>
@@ -29,7 +35,7 @@ const AssignRiders = () => {
               <th>Name</th>
               <th>Cost</th>
               <th>Created at</th>
-              <th>Pickup District at</th>
+              <th>Pickup District</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -42,7 +48,10 @@ const AssignRiders = () => {
                 <td>{new Date(parcel.createdAt).toLocaleDateString()}</td>
                 <td>{parcel.senderDistrict}</td>
                 <td>
-                  <button className="btn hover:btn-primary btn-sm text-secondary">
+                  <button
+                    onClick={() => handelOpenRiderModal(parcel)}
+                    className="btn hover:btn-primary btn-sm text-secondary"
+                  >
                     Assign Rider
                   </button>
                 </td>
@@ -51,6 +60,25 @@ const AssignRiders = () => {
           </tbody>
         </table>
       </div>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+      <dialog
+        ref={riderModalRef}
+        className="modal modal-bottom sm:modal-middle"
+      >
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };
