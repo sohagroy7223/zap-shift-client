@@ -102,8 +102,8 @@ const ApprovedRiders = () => {
               <th>Name</th>
               <th>Email</th>
               <th>District</th>
-              <th> Application Status</th>
-              <th> Work Status</th>
+              <th>Application Status</th>
+              <th>Work Status</th>
               <th>Actions</th>
             </tr>
           </thead>

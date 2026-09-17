@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AssignRiders = () => {
+  const [selectedParcel, setSelectedParcel] = useState(null);
   const axiosSecure = useAxiosSecure();
   const riderModalRef = useRef();
 
@@ -12,20 +13,31 @@ const AssignRiders = () => {
       const res = await axiosSecure.get(
         "/parcels?deliveryStatus=pending-pickup",
       );
+      // console.log("Rider response:", res.data);
       return res.data;
     },
   });
 
-  const handelOpenRiderModal = (parcel) => {
+  const { data: riders = [] } = useQuery({
+    queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
+    enabled: !!selectedParcel,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/riders?status=approved&district=${selectedParcel?.senderDistrict}&workStatus=available`,
+      );
+      return res.data;
+    },
+  });
+
+  const handelAssignRiderModal = (parcel) => {
+    setSelectedParcel(parcel);
+
     riderModalRef.current.showModal();
   };
 
   return (
     <div>
       <h3>Assign riders : {parcels.length}</h3>
-      {
-        // parcels.map(parcel=>)
-      }
       <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
         <table className="table">
           {/* head */}
@@ -49,7 +61,7 @@ const AssignRiders = () => {
                 <td>{parcel.senderDistrict}</td>
                 <td>
                   <button
-                    onClick={() => handelOpenRiderModal(parcel)}
+                    onClick={() => handelAssignRiderModal(parcel)}
                     className="btn hover:btn-primary btn-sm text-secondary"
                   >
                     Assign Rider
@@ -67,10 +79,8 @@ const AssignRiders = () => {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
+          <h3 className="font-bold text-lg">Riders: {riders.length}!</h3>
+
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
