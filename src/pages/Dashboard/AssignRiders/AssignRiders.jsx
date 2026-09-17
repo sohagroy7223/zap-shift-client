@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useRef, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AssignRiders = () => {
   const [selectedParcel, setSelectedParcel] = useState(null);
@@ -18,7 +19,7 @@ const AssignRiders = () => {
     },
   });
 
-  const { data: riders = [] } = useQuery({
+  const { data: riders = [], refetch } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
@@ -31,10 +32,34 @@ const AssignRiders = () => {
   });
   console.log(riders);
 
-  const handelAssignRiderModal = (parcel) => {
+  const openAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
 
     riderModalRef.current.showModal();
+  };
+
+  const handelAssignRider = (rider) => {
+    const riderAssignInfo = {
+      riderId: rider._id,
+      riderEmail: rider.email,
+      riderName: rider.name,
+      parcelName: selectedParcel._id,
+    };
+    axiosSecure
+      .patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
+      .then((res) => {
+        riderModalRef.current.close();
+        refetch();
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `Rider has been assigned.`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
   };
 
   return (
@@ -63,10 +88,10 @@ const AssignRiders = () => {
                 <td>{parcel.senderDistrict}</td>
                 <td>
                   <button
-                    onClick={() => handelAssignRiderModal(parcel)}
+                    onClick={() => openAssignRiderModal(parcel)}
                     className="btn hover:btn-primary btn-sm text-secondary"
                   >
-                    Assign Rider
+                    Find Rider
                   </button>
                 </td>
               </tr>
@@ -81,7 +106,7 @@ const AssignRiders = () => {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Riders: {riders.length}!</h3>
+          <h3 className="font-bold text-lg">Riders: {riders.length}</h3>
 
           <div className="overflow-x-auto">
             <table className="table">
@@ -95,12 +120,15 @@ const AssignRiders = () => {
               </thead>
               <tbody>
                 {riders.map((rider, i) => (
-                  <tr>
+                  <tr key={rider._id}>
                     <th>{i + 1}</th>
                     <td>{rider.name}</td>
                     <td>{rider.email}</td>
                     <td>
-                      <button className="btn btn-sm hover:btn-primary text-black">
+                      <button
+                        onClick={() => handelAssignRider(rider)}
+                        className="btn btn-sm hover:btn-primary text-black"
+                      >
                         Assign
                       </button>
                     </td>

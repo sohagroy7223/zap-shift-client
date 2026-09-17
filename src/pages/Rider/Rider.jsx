@@ -264,7 +264,7 @@ const Rider = () => {
 
         <input
           type="submit"
-          value="send parcel"
+          value="be a Rider"
           className="text-secondary bg-primary fond-bold btn w-6/12"
         />
       </form>
