@@ -25,9 +25,11 @@ const AssignRiders = () => {
       const res = await axiosSecure.get(
         `/riders?status=approved&district=${selectedParcel?.senderDistrict}&workStatus=available`,
       );
+
       return res.data;
     },
   });
+  console.log(riders);
 
   const handelAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
@@ -80,6 +82,33 @@ const AssignRiders = () => {
       >
         <div className="modal-box">
           <h3 className="font-bold text-lg">Riders: {riders.length}!</h3>
+
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {riders.map((rider, i) => (
+                  <tr>
+                    <th>{i + 1}</th>
+                    <td>{rider.name}</td>
+                    <td>{rider.email}</td>
+                    <td>
+                      <button className="btn btn-sm hover:btn-primary text-black">
+                        Assign
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="modal-action">
             <form method="dialog">
