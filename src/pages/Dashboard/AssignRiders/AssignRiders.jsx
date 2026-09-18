@@ -49,8 +49,8 @@ const AssignRiders = () => {
       .patch(`/parcels/${selectedParcel._id}`, riderAssignInfo)
       .then((res) => {
         riderModalRef.current.close();
-        refetch();
         if (res.data.modifiedCount) {
+          refetch();
           Swal.fire({
             position: "top-center",
             icon: "success",

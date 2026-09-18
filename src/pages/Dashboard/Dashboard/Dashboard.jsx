@@ -82,7 +82,6 @@ const Dashboard = () => {
                   <span className="is-drawer-close:hidden">Homepage</span>
                 </Link>
               </li>
-
               <li>
                 <Link
                   to="myParcels"
