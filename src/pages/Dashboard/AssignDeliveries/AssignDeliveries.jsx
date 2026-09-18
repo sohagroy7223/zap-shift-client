@@ -59,15 +59,21 @@ const AssignDeliveries = () => {
                 <th>{i + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>
-                  <button
-                    onClick={() => handelAcceptingParcel(parcel)}
-                    className="btn btn-sm text-black btn-success"
-                  >
-                    Accept
-                  </button>
-                  <button className="btn btn-sm text-black btn-warning ml-1.5">
-                    Reject
-                  </button>
+                  {parcel.deliveryStatus === "delivery_assign" ? (
+                    <>
+                      <button
+                        onClick={() => handelAcceptingParcel(parcel)}
+                        className="btn btn-sm text-black btn-success"
+                      >
+                        Accept
+                      </button>
+                      <button className="btn btn-sm text-black btn-warning ml-1.5">
+                        Reject
+                      </button>
+                    </>
+                  ) : (
+                    <span>confirm</span>
+                  )}
                 </td>
                 <td>Blue</td>
               </tr>
