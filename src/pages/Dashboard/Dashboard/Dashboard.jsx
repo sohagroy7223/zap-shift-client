@@ -2,7 +2,7 @@ import React from "react";
 import { MdHistory, MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router";
 import DashboardNav from "../DashbordNav/DashboardNav";
-import { FaMotorcycle, FaUsers } from "react-icons/fa";
+import { FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
 import useRole from "../../../Hooks/useRole";
 import { RiEBikeFill } from "react-icons/ri";
 
@@ -108,7 +108,26 @@ const Dashboard = () => {
                   </span>
                 </Link>
               </li>
-              {/* List item */}
+
+              {/* rider only route */}
+              {role === "rider" && (
+                <>
+                  <li>
+                    <Link
+                      to="assign-deliveries"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="assign-deliveries"
+                    >
+                      <FaTasks size={20} />
+                      <span className="is-drawer-close:hidden">
+                        Assign Deliveries
+                      </span>
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              {/* Admin only Route*/}
               {role === "admin" && (
                 <>
                   <li>
