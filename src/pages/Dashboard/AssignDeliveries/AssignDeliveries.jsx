@@ -2,20 +2,39 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AssignDeliveries = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch } = useQuery({
     queryKey: ["parcels", user.email, "delivery_assign"],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/parcels/rider?riderEmail=${user.email}&deliveryStatus=delivery_assign`,
       );
-      console.log(res.data);
+      //   console.log(res.data);
       return res.data;
     },
   });
+
+  const handelAcceptingParcel = (parcel) => {
+    const updateStatus = { deliveryStatus: "rider-arriving" };
+    axiosSecure
+      .patch(`/parcels/${parcel._id}/status`, updateStatus)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: `thanks for accepting.`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -36,11 +55,14 @@ const AssignDeliveries = () => {
           </thead>
           <tbody>
             {parcels.map((parcel, i) => (
-              <tr>
+              <tr key={parcel._id}>
                 <th>{i + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>
-                  <button className="btn btn-sm text-black btn-success">
+                  <button
+                    onClick={() => handelAcceptingParcel(parcel)}
+                    className="btn btn-sm text-black btn-success"
+                  >
                     Accept
                   </button>
                   <button className="btn btn-sm text-black btn-warning ml-1.5">
