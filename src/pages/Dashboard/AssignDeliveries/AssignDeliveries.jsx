@@ -18,8 +18,8 @@ const AssignDeliveries = () => {
     },
   });
 
-  const handelAcceptingParcel = (parcel) => {
-    const updateStatus = { deliveryStatus: "rider-arriving" };
+  const handelAcceptingParcel = (parcel, status) => {
+    const updateStatus = { deliveryStatus: status };
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, updateStatus)
       .then((res) => {
@@ -28,7 +28,7 @@ const AssignDeliveries = () => {
           Swal.fire({
             position: "top-center",
             icon: "success",
-            title: `thanks for accepting.`,
+            title: `thanks for ${status}.`,
             showConfirmButton: false,
             timer: 2000,
           });
@@ -77,7 +77,9 @@ const AssignDeliveries = () => {
                   {parcel.deliveryStatus === "delivery_assign" ? (
                     <>
                       <button
-                        onClick={() => handelAcceptingParcel(parcel)}
+                        onClick={() =>
+                          handelAcceptingParcel(parcel, "rider-arriving")
+                        }
                         className="btn btn-sm text-black btn-success"
                       >
                         Accept
@@ -90,12 +92,29 @@ const AssignDeliveries = () => {
                       </button>
                     </>
                   ) : (
-                    <button className="btn btn-sm btn-success text-green-800 ">
+                    <button className="btn btn-sm btn-success text-black">
                       Accepted
                     </button>
                   )}
                 </td>
-                <td>Blue</td>
+                <td>
+                  <button
+                    onClick={() =>
+                      handelAcceptingParcel(parcel, "parcel-PickedUp")
+                    }
+                    className={`${parcel.deliveryStatus === "parcel-PickedUp" ? "btn btn-sm btn-success text-black" : "btn btn-sm btn-primary text-green-800"}`}
+                  >
+                    Mark as Picked Up
+                  </button>
+                  <button
+                    onClick={() =>
+                      handelAcceptingParcel(parcel, "parcel-delivered")
+                    }
+                    className="btn btn-sm btn-primary mx-2 text-green-800 "
+                  >
+                    Mark as Delivered
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
