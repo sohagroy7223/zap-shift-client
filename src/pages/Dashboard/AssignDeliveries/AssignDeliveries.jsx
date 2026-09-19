@@ -18,8 +18,8 @@ const AssignDeliveries = () => {
     },
   });
 
-  const handelAcceptingParcel = (parcel, status) => {
-    const updateStatus = { deliveryStatus: status };
+  const handelUpdateParcelStatus = (parcel, status) => {
+    const updateStatus = { deliveryStatus: status, riderId: parcel.riderId };
     axiosSecure
       .patch(`/parcels/${parcel._id}/status`, updateStatus)
       .then((res) => {
@@ -78,7 +78,7 @@ const AssignDeliveries = () => {
                     <>
                       <button
                         onClick={() =>
-                          handelAcceptingParcel(parcel, "rider-arriving")
+                          handelUpdateParcelStatus(parcel, "rider-arriving")
                         }
                         className="btn btn-sm text-black btn-success"
                       >
@@ -100,15 +100,15 @@ const AssignDeliveries = () => {
                 <td>
                   <button
                     onClick={() =>
-                      handelAcceptingParcel(parcel, "parcel-PickedUp")
+                      handelUpdateParcelStatus(parcel, "parcel-PickedUp")
                     }
                     className={`${parcel.deliveryStatus === "parcel-PickedUp" ? "btn btn-sm btn-success text-black" : "btn btn-sm btn-primary text-green-800"}`}
                   >
-                    Mark as Picked Up
+                    {`${parcel.deliveryStatus === "parcel-PickedUp" ? "Picked Up" : "Mark as Picked Up"}`}
                   </button>
                   <button
                     onClick={() =>
-                      handelAcceptingParcel(parcel, "parcel-delivered")
+                      handelUpdateParcelStatus(parcel, "parcel-delivered")
                     }
                     className="btn btn-sm btn-primary mx-2 text-green-800 "
                   >
