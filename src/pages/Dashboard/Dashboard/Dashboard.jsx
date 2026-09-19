@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import DashboardNav from "../DashbordNav/DashboardNav";
 import { FaMotorcycle, FaTasks, FaUsers } from "react-icons/fa";
 import useRole from "../../../Hooks/useRole";
+import { SiGoogletasks } from "react-icons/si";
 import { RiEBikeFill } from "react-icons/ri";
 
 const Dashboard = () => {
@@ -121,6 +122,18 @@ const Dashboard = () => {
                       <FaTasks size={20} />
                       <span className="is-drawer-close:hidden">
                         Assign Deliveries
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="completed-deliveries"
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="completed-delivers"
+                    >
+                      <SiGoogletasks size={19} />
+                      <span className="is-drawer-close:hidden">
+                        Completed Delivers
                       </span>
                     </Link>
                   </li>
