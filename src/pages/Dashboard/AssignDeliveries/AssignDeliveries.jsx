@@ -36,6 +36,21 @@ const AssignDeliveries = () => {
       });
   };
 
+  const handelRejectParcel = (parcel) => {
+    axiosSecure.patch(`/parcels/${parcel._id}/reject`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `Reject this parcel.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <h3>
@@ -50,7 +65,7 @@ const AssignDeliveries = () => {
               <th>#</th>
               <th>Name</th>
               <th>confirm</th>
-              <th>Favorite Color</th>
+              <th>other Action</th>
             </tr>
           </thead>
           <tbody>
@@ -67,12 +82,17 @@ const AssignDeliveries = () => {
                       >
                         Accept
                       </button>
-                      <button className="btn btn-sm text-black btn-warning ml-1.5">
+                      <button
+                        onClick={() => handelRejectParcel(parcel)}
+                        className="btn btn-sm text-black btn-warning ml-1.5"
+                      >
                         Reject
                       </button>
                     </>
                   ) : (
-                    <span>confirm</span>
+                    <button className="btn btn-sm btn-success text-green-800 ">
+                      Accepted
+                    </button>
                   )}
                 </td>
                 <td>Blue</td>

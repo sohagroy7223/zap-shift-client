@@ -30,7 +30,7 @@ const AssignRiders = () => {
       return res.data;
     },
   });
-  console.log(riders);
+  // console.log(riders);
 
   const openAssignRiderModal = (parcel) => {
     setSelectedParcel(parcel);
