@@ -16,7 +16,16 @@ const CompletedDelivers = () => {
       return res.data;
     },
   });
-  console.log(parcels);
+
+  const calculatePayout = (parcel) => {
+    console.log(parcel);
+    if (parcel.senderDistrict === parcel.receiverDistrict) {
+      return parcel.cost * 0.8;
+    } else {
+      return parcel.cost * 0.6;
+    }
+  };
+
   return (
     <div>
       <h3>Completed delivers: {parcels.length}</h3>
@@ -28,9 +37,10 @@ const CompletedDelivers = () => {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Cost</th>
               <th>Created at</th>
               <th>Pickup District</th>
+              <th>Cost</th>
+              <th>Payout</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -39,12 +49,13 @@ const CompletedDelivers = () => {
               <tr key={parcel._id}>
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
-                <td>$ {parcel.cost}</td>
                 <td>{new Date(parcel.createdAt).toLocaleDateString()}</td>
                 <td>{parcel.senderDistrict}</td>
+                <td>$ {parcel.cost}</td>
+                <td>{calculatePayout(parcel)}</td>
                 <td>
                   <button className="btn hover:btn-primary btn-sm text-secondary">
-                    Find Rider
+                    Cash out
                   </button>
                 </td>
               </tr>
