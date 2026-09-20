@@ -8,10 +8,10 @@ const AssignDeliveries = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: parcels = [], refetch } = useQuery({
-    queryKey: ["parcels", user.email, "driver_assigned"],
+    queryKey: ["parcels", user.email, "driver-assigned"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/parcels/rider?riderEmail=${user.email}&deliveryStatus=driver_assigned`,
+        `/parcels/rider?riderEmail=${user.email}&deliveryStatus=driver-assigned`,
       );
       //   console.log(res.data);
       return res.data;
@@ -78,7 +78,7 @@ const AssignDeliveries = () => {
                 <th>{i + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>
-                  {parcel.deliveryStatus === "driver_assigned" ? (
+                  {parcel.deliveryStatus === "driver-assigned" ? (
                     <>
                       <button
                         onClick={() =>

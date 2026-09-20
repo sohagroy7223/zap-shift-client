@@ -9,11 +9,9 @@ const AssignRiders = () => {
   const riderModalRef = useRef();
 
   const { data: parcels = [] } = useQuery({
-    queryKey: ["parcels", "pending-pickup"],
+    queryKey: ["parcels", "parcel-paid"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        "/parcels?deliveryStatus=pending-pickup",
-      );
+      const res = await axiosSecure.get("/parcels?deliveryStatus=parcel-paid");
       // console.log("Rider response:", res.data);
       return res.data;
     },

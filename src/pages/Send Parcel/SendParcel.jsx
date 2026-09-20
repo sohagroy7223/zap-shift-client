@@ -150,12 +150,12 @@ const SendParcel = () => {
 
     Swal.fire({
       title: "agree with the cost ?",
-      text: `You will be charged! ${cost} taka`,
+      text: `You will be charged! $:{cost} `,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes I agree",
+      confirmButtonText: "Yes I confirm and pay",
     }).then((result) => {
       navigate("/dashboard/myParcels");
       if (result.isConfirmed) {
