@@ -80,6 +80,16 @@ const NavBar = () => {
           </li>
           <li>
             <NavLink
+              to="/dashboard"
+              className={({ isActive, isPending }) =>
+                isActive ? "mr-4 font-bold bg-primary " : "mr-4"
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="dashboard/myParcels"
               className={({ isActive, isPending }) =>
                 isActive ? "mr-4 font-bold bg-primary " : "mr-4"

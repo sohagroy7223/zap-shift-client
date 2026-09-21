@@ -17,7 +17,6 @@ const SendParcel = () => {
     getValues,
     formState: { errors },
   } = useForm();
-
   const axiosSecure = useAxiosSecure();
 
   const senderRegion = watch("senderRegion");
@@ -150,7 +149,7 @@ const SendParcel = () => {
 
     Swal.fire({
       title: "agree with the cost ?",
-      text: `You will be charged! $:{cost} `,
+      text: `You will be charged! $${cost} dollar`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

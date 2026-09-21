@@ -27,6 +27,7 @@ const MyParcel = () => {
       parcelId: parcel._id,
       senderEmail: parcel.senderEmail,
       parcelName: parcel.parcelName,
+      trackingId: parcel.trackingId,
     };
     const res = await axiosInstance.post(
       "/payment-checkout-section",
