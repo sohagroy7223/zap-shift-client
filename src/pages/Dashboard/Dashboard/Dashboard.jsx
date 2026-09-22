@@ -62,7 +62,7 @@ const Dashboard = () => {
               {/* List item */}
               <li>
                 <Link
-                  to="/"
+                  to="/dashboard"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Homepage"
                 >

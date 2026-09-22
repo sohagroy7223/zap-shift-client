@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Pie, PieChart } from "recharts";
+import {
+  RechartsDevtools,
+  RECHARTS_DEVTOOLS_PORTAL_ID,
+} from "@recharts/devtools";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +18,13 @@ const AdminDashboard = () => {
     },
   });
 
-  console.log(deliveryState);
+  const getPiChartData = (data) => {
+    return data.map((item) => {
+      return { name: item.status, value: item.count };
+    });
+  };
+
+  //   console.log(deliveryState);
 
   return (
     <div>
@@ -37,11 +48,37 @@ const AdminDashboard = () => {
                 ></path>
               </svg>
             </div>
-            <div className="stat-title">{state._id}</div>
+            <div className="stat-title">{state.status}</div>
             <div className="stat-value">{state.count}</div>
           </div>
         ))}
       </div>
+      {/* pi chart */}
+      <div className="w-full h-100">
+        <PieChart
+          style={{
+            width: "100%",
+            maxWidth: "500px",
+            maxHeight: "80vh",
+            aspectRatio: 2,
+          }}
+          responsive
+        >
+          <Pie
+            dataKey="value"
+            startAngle={180}
+            endAngle={0}
+            data={getPiChartData(deliveryState)}
+            cx="50%"
+            cy="100%"
+            outerRadius="120%"
+            label
+            isAnimationActive={true}
+          />
+          <RechartsDevtools />
+        </PieChart>
+      </div>
+      <div id={RECHARTS_DEVTOOLS_PORTAL_ID}></div>
     </div>
   );
 };
