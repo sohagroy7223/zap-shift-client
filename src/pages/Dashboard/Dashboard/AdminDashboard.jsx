@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { Pie, PieChart } from "recharts";
-import {
-  RechartsDevtools,
-  RECHARTS_DEVTOOLS_PORTAL_ID,
-} from "@recharts/devtools";
+import { Legend, Pie, PieChart, Tooltip } from "recharts";
+import { RechartsDevtools } from "@recharts/devtools";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
+
+  const colorMap = {
+    "pending-pickup": "#0088FE",
+    "delivery-assigned": "#FFBB28",
+    "in-transit": "#00C49F",
+  };
 
   const { data: deliveryState = [] } = useQuery({
     queryKey: ["delivery-status-status"],
@@ -20,7 +23,11 @@ const AdminDashboard = () => {
 
   const getPiChartData = (data) => {
     return data.map((item) => {
-      return { name: item.status, value: item.count };
+      return {
+        name: item.status,
+        value: item.count,
+        fill: colorMap[item.status] || "#8884D8",
+      };
     });
   };
 
@@ -75,10 +82,11 @@ const AdminDashboard = () => {
             label
             isAnimationActive={true}
           />
+          <Tooltip></Tooltip>
+          <Legend></Legend>
           <RechartsDevtools />
         </PieChart>
       </div>
-      <div id={RECHARTS_DEVTOOLS_PORTAL_ID}></div>
     </div>
   );
 };

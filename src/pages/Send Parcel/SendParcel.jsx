@@ -156,11 +156,11 @@ const SendParcel = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes I confirm and pay",
     }).then((result) => {
-      navigate("/dashboard/myParcels");
       if (result.isConfirmed) {
         axiosSecure.post("/parcels", data).then((res) => {
           // console.log("after post ", res.data);
           if (res.data.insertedId) {
+            navigate("/dashboard/myParcels");
             Swal.fire({
               title: "add your parcel!",
               text: "Your parcel has been added.",
