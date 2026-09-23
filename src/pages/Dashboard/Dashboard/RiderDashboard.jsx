@@ -1,25 +1,75 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 
 const RiderDashboard = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: delivered_parcels = [] } = useQuery({
-    queryKey: ["rider-delivery-par-day", user.email],
+  const { data: deliveryData = [] } = useQuery({
+    queryKey: ["delivery-per-day", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/riders/delivery-per-day?email=${user.email}`,
       );
+
       return res.data;
     },
+    enabled: !!user?.email,
   });
+
+  console.log(deliveryData);
 
   return (
     <div>
-      <h3>Rider delivered parcels: {delivered_parcels.length}</h3>
+      <h2 className="text-2xl font-bold mb-5">
+        My Daily Delivery: {deliveryData.length}
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>date</th>
+              <th>delivery</th>
+            </tr>
+          </thead>
+          <tbody className="bg-gray-200 ">
+            {deliveryData.map((data, index) => (
+              <tr key={index}>
+                <th>{index + 1}</th>
+                <td>{data.date}</td>
+                <td>{data.parcelDelivered}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="w-full h-96">
+        <BarChart width={700} height={400} data={deliveryData}>
+          <CartesianGrid strokeDasharray="3 3" />
+
+          <XAxis dataKey="date" />
+
+          <YAxis />
+
+          <Tooltip />
+
+          <Bar dataKey="parcelDelivered" fill="#0088FE" />
+        </BarChart>
+      </div>
     </div>
   );
 };
