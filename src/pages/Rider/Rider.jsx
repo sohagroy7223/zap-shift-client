@@ -31,9 +31,9 @@ const Rider = () => {
   };
 
   const handelFromSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     axiosSecure.post("/riders", data).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",

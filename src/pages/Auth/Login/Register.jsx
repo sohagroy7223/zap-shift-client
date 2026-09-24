@@ -55,17 +55,17 @@ const Register = () => {
                   alert("check your mail, and verified email");
                   navigate(location?.state || "/");
                 })
-                .catch((error) => {
-                  console.log(error);
+                .catch(() => {
+                  // console.log(error);
                 });
             })
-            .catch((error) => {
-              console.log(error);
+            .catch(() => {
+              // console.log(error);
             });
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   };
 

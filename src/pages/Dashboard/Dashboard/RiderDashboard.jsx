@@ -36,7 +36,7 @@ const RiderDashboard = () => {
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table table-zebra">
           {/* head */}
           <thead>
             <tr>
@@ -45,7 +45,7 @@ const RiderDashboard = () => {
               <th>delivery</th>
             </tr>
           </thead>
-          <tbody className="bg-gray-200 ">
+          <tbody className="  ">
             {deliveryData.map((data, index) => (
               <tr key={index}>
                 <th>{index + 1}</th>
@@ -57,7 +57,7 @@ const RiderDashboard = () => {
         </table>
       </div>
 
-      <div className="w-full h-96">
+      <div className="flex flex-wrap w-full mt-10">
         <BarChart width={700} height={400} data={deliveryData}>
           <CartesianGrid strokeDasharray="3 3" />
 

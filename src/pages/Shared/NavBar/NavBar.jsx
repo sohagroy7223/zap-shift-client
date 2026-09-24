@@ -30,7 +30,7 @@ const NavBar = () => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -44,16 +44,6 @@ const NavBar = () => {
           }
         >
           Services
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/about"
-          className={({ isActive, isPending }) =>
-            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
-          }
-        >
-          About Us
         </NavLink>
       </li>
       <li>
@@ -100,6 +90,16 @@ const NavBar = () => {
           </li>
         </>
       )}
+      <li>
+        <NavLink
+          to="/about"
+          className={({ isActive, isPending }) =>
+            isActive ? "mr-4 font-bold bg-primary " : "mr-4"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
     </>
   );
   return (
