@@ -9,11 +9,7 @@ const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [search, setSearch] = useState("");
 
-  const {
-    refetch,
-
-    data: users = [],
-  } = useQuery({
+  const { refetch, data: users = [] } = useQuery({
     queryKey: ["users", search],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?search=${search}`);
@@ -56,7 +52,6 @@ const UserManagement = () => {
 
   return (
     <div>
-      <h3>management Users : {users.length}</h3>
       <label className="input mt-2">
         <svg
           className="h-[1em] opacity-50"
